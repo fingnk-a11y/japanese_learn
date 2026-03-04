@@ -1,0 +1,794 @@
+/* --- 1. DESIGN TOKENS --- */
+:root {
+    --primary-red: #e63946;
+    --dark-navy: #1a1a2e;
+    --foundation-blue: #0984e3;
+    --challenge-gold: #f1c40f;
+    --grammar-blue: #0984e3;
+    --text-dark: #2d3436;
+    --text-gray: #636e72;
+    --bg-light: #f8f9fa;
+    --shadow-premium: 0 15px 40px rgba(0,0,0,0.06);
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- 2. GLOBAL RESET --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fcfdfd;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* --- 3. PREMIUM HERO SECTION --- */
+/* --- 3. BULLETPROOF RED HERO --- */
+.hero {
+    /* Hard-coded red gradient to prevent 'white' background issues */
+    background: linear-gradient(135deg, #e63946 0%, #b91d2a 100%) !important;
+    padding: 100px 20px;
+    margin-bottom: 60px;
+    border-radius: 0 0 60px 60px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+/* Forcing the text to be white so it doesn't disappear */
+.hero h1 {
+    color: #ffffff !important;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.hero p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.logo-text {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+/* --- 3.1 HERO NAVIGATION LAYOUT --- */
+/* --- 3.1 HERO NAVIGATION LAYOUT --- */
+/* Container to push buttons to far corners */
+.hero-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    padding: 0 30px;
+    width: 100%;
+    z-index: 100;
+}
+
+/* The Premium Back Button Style */
+.back-btn-styled {
+    text-decoration: none;
+    color: white !important;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.15);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.back-btn-styled:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px); /* Moves left on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: white;
+}
+
+.back-icon {
+    font-size: 1.1rem;
+}
+
+/* Style the Menu Trigger Button */
+.menu-trigger {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    backdrop-filter: blur(5px);
+    transition: var(--transition);
+}
+
+.menu-trigger:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* --- 4. ORGANIZED SECTION BLOCKS --- */
+.menu-section-block {
+    background: white;
+    max-width: 1050px;
+    margin: 0 auto 50px;
+    padding: 50px;
+    border-radius: 40px;
+    box-shadow: var(--shadow-premium);
+    border: 1px solid rgba(0,0,0,0.03);
+    position: relative;
+    text-align: left;
+}
+
+/* Decorative vertical bar on the left */
+.menu-section-block::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 40px; bottom: 40px;
+    width: 8px;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Color Coding for Steps */
+.menu-section-block:nth-of-type(1)::before { background: var(--foundation-blue); }
+.menu-section-block:nth-of-type(2)::before { background: var(--primary-red); }
+.menu-section-block:nth-of-type(3)::before { background: var(--challenge-gold); }
+
+/* --- 5. TITLES & TYPOGRAPHY --- */
+.section-indicator {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Indicator Colors */
+.blue { background: var(--foundation-blue); }
+.red { background: var(--primary-red); }
+.gold { background: var(--challenge-gold); }
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--dark-navy);
+    margin-bottom: 5px;
+}
+
+.section-desc {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+/* --- 6. GRID & ITEMS --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.menu-item {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.menu-item:hover {
+    background: white;
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--primary-red);
+}
+
+/* Icons inside menu items */
+.item-icon-circle {
+    width: 85px; height: 85px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.blue-bg { background: var(--foundation-blue); }
+.red-bg { background: var(--primary-red); }
+.gold-bg { background: var(--challenge-gold); }
+
+.item-text .jp {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.item-text .en {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+}
+
+/* --- 7. MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .hero { padding: 60px 20px; border-radius: 0 0 30px 30px; }
+    .hero h1 { font-size: 2.8rem; }
+    .menu-section-block { padding: 30px 20px; margin: 0 15px 30px; }
+    .section-title { font-size: 1.8rem; }
+    .menu-grid { grid-template-columns: 1fr; }
+}
+/* --- PREMIUM BACK BUTTON --- */
+.back-btn-styled {
+    text-decoration: none;
+    color: white !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    /* The Button Shell */
+    background: rgba(255, 255, 255, 0.15); /* Glass effect */
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* Animation */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px); /* Frosty glass look */
+}
+
+.back-btn-styled:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px); /* Subtle slide to the left */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Make the arrow icon look better */
+.back-btn-styled::before {
+    content: "⬅";
+    font-size: 1.1rem;
+}
+/* Specific styling for Kana cards */
+#kana-grid .menu-item {
+    padding: 30px;
+    cursor: default; /* Not a link, just a display card */
+}
+
+#kana-grid .item-icon-circle {
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+#kana-grid .en {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    text-transform: uppercase;
+}
+#category-menu {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.vocab-card {
+    background: white;
+    padding: 40px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow-premium);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.vocab-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-red);
+}
+
+.vocab-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.card-text .jp {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark-navy);
+}
+
+.card-text .en {
+    font-size: 1rem;
+    color: var(--text-gray);
+    text-transform: capitalize;
+}
+/* THE DARK BACKGROUND */
+.modal-overlay {
+    display: none; /* JavaScript switches this to 'flex' */
+    position: fixed; /* Lifts it out of the corner and stays on screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dim the background */
+    backdrop-filter: blur(8px); /* Modern blur effect */
+    z-index: 9999; /* Higher than any other element */
+
+    /* THE MAGIC: Centers the white card */
+    justify-content: center;
+    align-items: center;
+}
+
+/* THE WHITE CARD */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    position: relative; /* Only for the 'X' button positioning */
+
+    /* Animation: Makes it pop from the center */
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Close button positioning */
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+}
+/* Make the character in the modal look massive and artistic */
+#modal-kanji-main {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--dark-navy);
+    margin: 10px 0;
+    line-height: 1;
+}
+
+/* Style the Onyomi/Kunyomi boxes */
+.readings-box {
+    display: flex;
+    justify-content: space-around;
+    background: #fdf2f2; /* Very light red tint */
+    border-radius: 15px;
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #fee2e2;
+}
+
+.reading-label {
+    font-size: 0.7rem;
+    color: var(--primary-red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.reading-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+/* GLOBAL SEARCH BAR */
+/* Ensure the container is the "anchor" for the icon */
+/* This centers the search box in your Hero header */
+
+/* This anchors the magnifying glass INSIDE the box */
+/* Container for the search elements */
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* The Magnifying Glass */
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* The Input Field */
+#global-search {
+    width: 100%;
+    padding: 12px 45px 12px 40px; /* Space for icon (left) and clear button (right) */
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* The X Button */
+#clear-search {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+    display: none; /* Controlled by app.js */
+}
+
+#clear-search:hover { color: #ff4b2b; }
+/* --- MOBILE NAVIGATION TWEAKS --- */
+@media (max-width: 768px) {
+    /* Reduce the container padding so buttons don't touch the screen edge */
+    .hero-nav-row {
+        padding: 0 15px;
+        top: 15px;
+    }
+
+    .back-btn-styled {
+        padding: 8px 14px; /* Slimmer padding */
+        font-size: 0.75rem; /* Smaller text */
+        gap: 5px; /* Tighter gap between arrow and text */
+        border-radius: 10px;
+    }
+
+    .back-icon {
+        font-size: 0.9rem;
+    }
+
+    .menu-trigger {
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        border-radius: 10px;
+    }
+}
+/* add simple loading indicator used by several pages */
+.loading {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 60px 0;
+}
+
+/* Keep loader white when placed inside the hero (dark background) */
+.hero .loading {
+    color: white;
+}
+
+/* --- GLOBAL NAVIGATION BAR --- */
+.global-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    pointer-events: none; /* Allows clicking hero content behind it */
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    gap: 12px;
+    pointer-events: auto; /* Re-enables clicking for buttons */
+}
+
+/* Circular Flag Buttons */
+/* --- 1. THE GLASS NAVIGATION BUTTONS (Flags & Menu) --- */
+.global-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 30px 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.flag-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Profile button styling */
+.profile-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-btn:hover {
+    transform: scale(1.15) rotate(5deg);
+    border-color: white;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* theme toggle inherits the same circular style */
+.theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.theme-btn #theme-icon {
+    font-size: 1.2rem;
+}
+
+/* ---------- DARK MODE STYLES ---------- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #8B7500 0%, #5C4D00 100%) !important;
+}
+body.dark-mode .menu-section-block {
+    background: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #333;
+}
+body.dark-mode .section-title {
+    color: #ffffff;
+}
+body.dark-mode .menu-item {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #444;
+}
+body.dark-mode .back-btn-styled,
+body.dark-mode .menu-trigger {
+    background: rgba(255,255,255,0.1);
+}
+body.dark-mode .vocab-card,
+body.dark-mode .grammar-card {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+body.dark-mode .modal-content {
+    background: #2a2a2a;
+}
+/* Kanji/kana specific overrides */
+body.dark-mode .kana-card {
+    background: #2a2a2a;
+    border-color: #444;
+}
+body.dark-mode .kana-char,
+body.dark-mode .kana-romaji,
+body.dark-mode .large-kana,
+body.dark-mode .reading-label,
+body.dark-mode .reading-value,
+body.dark-mode .ex-word,
+body.dark-mode .ex-reading,
+body.dark-mode .ex-meaning,
+body.dark-mode .tab-btn,
+body.dark-mode .tab-btn.active,
+body.dark-mode #kanji-search,
+body.dark-mode .no-results,
+body.dark-mode .no-results p,
+body.dark-mode .level-tag {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .tab-btn {
+    background: #444;
+}
+body.dark-mode .tab-btn.active {
+    background: #e63946;
+}
+
+body.dark-mode .search-box {
+    background: #1a1a1a;
+    border-color: #444;
+}
+
+/* add additional overrides as you expand dark support */
+
+.flag-btn:hover {
+    transform: scale(1.15) rotate(5deg);
+    border-color: white;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.menu-btn {
+    background: rgba(26, 26, 46, 0.8); /* Dark navy with slight transparency */
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: var(--dark-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 2. LESSON ACTION BUTTONS (Back, Prev, Next) --- */
+.lesson-nav-row {
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-to-list, .nav-arrow-btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Specific Hover Logic */
+.back-to-list:hover, .nav-arrow-btn:hover {
+    background: white;
+    color: var(--grammar-blue) !important;
+    transform: translateX(-5px); /* Moves left to indicate "going back" */
+}
+
+/* Next button moves right on hover */
+.nav-arrow-btn.next-btn:hover {
+    transform: translateX(5px);
+}
+/* --- SIDEBAR DRAWER --- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -320px; /* Start hidden */
+    width: 300px;
+    height: 100%;
+    background: var(--dark-navy);
+    z-index: 2000;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 100px 40px;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+}
+
+.side-menu.active {
+    transform: translateX(-320px); /* Slide in */
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 1500;
+}
+
+.menu-overlay.active {
+    display: block;
+}
+
+.menu-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    transition: color 0.3s;
+}
+
+.menu-links a:hover {
+    color: var(--grammar-blue);
+}
+/* flag menus */
+.global-nav {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999; /* Stay above everything */
+}
+
+.flag-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+    display: flex;
+}
+
+.flag-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nihongo Master | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <header class="hero">
+    <div class="hero-nav-row">
+        <button class="profile-btn">
+            <span>👤</span>
+        </button>
+
+        <div class="nav-right">
+            <button id="theme-toggle" class="flag-btn theme-btn" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span>
+            </button>
+            <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                <img id="flag-img" src="assets/flags/tm.png" alt="Switch Language">
+            </button>
+            <button class="menu-trigger" onclick="toggleMenu()">MENU ☰</button>
+        </div>
+    </div>
+
+    <div class="hero-main">
+        <h1>Nihongo Master</h1>
+        <p id="hero-subtitle">Your path to Japanese fluency starts here.</p>
+    </div>
+</header>
+
+    <main class="main-container">
+
+        <section class="menu-section-block">
+    <span class="section-indicator blue">Step 1</span>
+    <h2 class="section-title">The Foundation</h2>
+    <p class="section-desc">Master the two primary writing systems.</p>
+
+    <div class="menu-grid">
+        <a href="kana.html?type=hiragana" class="menu-item">
+            <div class="item-icon-circle blue-bg">あ</div>
+            <div class="item-text">
+                <span class="jp">Hiragana</span>
+                <span class="en">Primary alphabet</span>
+            </div>
+        </a>
+
+        <a href="kana.html?type=katakana" class="menu-item">
+            <div class="item-icon-circle red-bg">ア</div>
+            <div class="item-text">
+                <span class="jp">Katakana</span>
+                <span class="en">Foreign words</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+        <section class="menu-section-block">
+            <div class="section-indicator red">Step 2</div>
+            <div class="section-header">
+                <h2 class="section-title">Applied Learning</h2>
+                <p class="section-desc">Move beyond the alphabet into real words and rules.</p>
+            </div>
+
+            <div class="menu-grid">
+                <a href="vocabulary.html" class="menu-item">
+                    <div class="item-icon-circle red-bg">📖</div>
+                    <div class="item-text"><span class="jp">単語</span><span class="en">Vocabulary</span></div>
+                </a>
+                <a href="grammar.html" class="menu-item">
+                    <div class="item-icon-circle red-bg">⚖️</div>
+                    <div class="item-text"><span class="jp">文法</span><span class="en">Grammar</span></div>
+                </a>
+                <a href="kanji.html" class="menu-item">
+                    <div class="item-icon-circle red-bg">⛩️</div>
+                    <div class="item-text"><span class="jp">漢字</span><span class="en">Kanji</span></div>
+                </a>
+            </div>
+        </section>
+
+        <section class="menu-section-block">
+            <div class="section-indicator gold">Step 3</div>
+            <div class="section-header">
+                <h2 class="section-title">Challenge Zone</h2>
+                <p class="section-desc">Test your memory and earn rewards.</p>
+            </div>
+
+            <div class="menu-grid">
+                <a href="quiz.html" class="menu-item">
+                    <div class="item-icon-circle gold-bg">🏆</div>
+                    <div class="item-text"><span class="jp">クイズ</span><span class="en">Flash Quiz</span></div>
+                </a>
+                <a href="match-game.html" class="menu-item">
+                    <div class="item-icon-circle gold-bg">🎮</div>
+                    <div class="item-text"><span class="jp">ゲーム</span><span class="en">Memory Match</span></div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function toggleMenu() {
+            alert("Menu functionality coming soon!");
+        }
+    </script>
+<script src="app.js"></script>
+</body>
+</html>

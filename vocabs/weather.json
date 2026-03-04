@@ -1,0 +1,14 @@
+[
+  { "en": "Sunny", "jp": "はれ", "romaji": "Hare", "tm": "Açyk howa", "img": "weather/sunny.png" },
+  { "en": "Rainy", "jp": "あめ", "romaji": "Ame", "tm": "Ýagynly", "img": "weather/rainy.png" },
+  { "en": "Cloudy", "jp": "くもり", "romaji": "Kumori", "tm": "Bulutly", "img": "weather/cloudy.png" },
+  { "en": "Snowy", "jp": "ゆき", "romaji": "Yuki", "tm": "Garly", "img": "weather/snow.png" },
+  { "en": "Windy", "jp": "かぜ", "romaji": "Kaze", "tm": "Şemally", "img": "weather/windy.png" },
+  { "en": "Thunder", "jp": "かみなり", "romaji": "Kaminari", "tm": "Ýyldyrym", "img": "weather/thunder.png" },
+  { "en": "Typhoon", "jp": "たいふゅう", "romaji": "Taifū", "tm": "Taýfun", "img": "weather/typhoon.png" },
+  { "en": "Rainbow", "jp": "にじ", "romaji": "Niji", "tm": "Älemgoşar", "img": "weather/rainbow.png" },
+  { "en": "Sky", "jp": "そら", "romaji": "Sora", "tm": "Asman", "img": "weather/sky.png" },
+  { "en": "Hot", "jp": "あつい", "romaji": "Atsui", "tm": "Yssy", "img": "weather/hot.png" },
+  { "en": "Cold", "jp": "さむい", "romaji": "Samui", "tm": "Sowuk", "img": "weather/cold.png" },
+  { "en": "Weather", "jp": "てんき", "romaji": "Tenki", "tm": "Howa ýagdaýy", "img": "weather/weather.png" }
+]

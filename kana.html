@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NM | Kana Master</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="kana.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-nav-row">
+            <a href="index.html" class="back-btn-styled">Back</a>
+            <div class="nav-right">
+                <button id="theme-toggle" class="flag-btn theme-btn" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span>
+                </button>
+                <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                    <img id="flag-img" src="assets/flags/tm.png" alt="Switch Language">
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-main">
+            <h1>Kana Master</h1>
+            <p>Select a system to start learning.</p>
+            
+           <div class="kana-tabs">
+    <button class="tab-btn" onclick="switchKana('hiragana', this)">Hiragana <span class="tab-icon">ひ</span></button>
+    <button class="tab-btn" onclick="switchKana('katakana', this)">Katakana <span class="tab-icon">カ</span></button>
+    <!-- sliding indicator for active tab -->
+    <div class="tab-slider"></div>
+</div>
+        </div>
+    </header>
+
+    <main id="kana-grid" class="kana-grid"></main>
+
+  <div id="card-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+
+        <div class="stroke-container">
+            <img id="stroke-animation" src="" alt="Stroke Order">
+            <div id="modal-jp" class="large-kana"></div>
+        </div>
+
+        <div class="details-container">
+            <h2 id="modal-romaji"></h2>
+            <p id="modal-en"></p>
+            <button id="sound-btn" class="menu-trigger red-bg">🔊 Hear Sound</button>
+        </div>
+    </div>
+</div>
+
+
+    <script src="app.js"></script>
+    <script src="kana.js"></script>
+</body>
+</html>

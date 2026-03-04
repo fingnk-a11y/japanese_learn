@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Grammar Library</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="grammar.css">
+</head>
+<body class="grammar-page">
+
+<nav class="global-nav">
+    <div class="nav-left">
+        <a href="index.html" class="back-btn-styled home-back-btn" id="home-link">← HOME</a>
+    </div>
+    <div class="nav-right">
+        <button id="theme-toggle" class="flag-btn theme-btn" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span>
+        </button>
+        <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+            <img id="flag-img" src="assets/flags/tm.png" alt="Switch Language">
+        </button>
+        <button class="menu-btn" onclick="toggleMenu()">MENU ☰</button>
+    </div>
+</nav>
+<header id="grammar-hero" class="hero">
+        <div class="hero-main">
+            <h1>Grammar Library</h1>
+            <p>Browse grammar lessons and deepen your understanding.</p>
+        </div>
+    </header>
+
+<main>
+    <div id="grid-view-container" class="main-container">
+        <div id="grammar-grid" class="grammar-grid"></div>
+    </div>
+
+    <div id="lesson-detail-view" class="main-container" style="display: none;"></div>
+</main>
+
+  <script src="app.js"></script>
+<script src="grammar.js"></script>
+</body>
+</html>

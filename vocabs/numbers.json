@@ -1,0 +1,14 @@
+[
+  {"en": "One (1)", "jp": "いち", "romaji": "Ichi", "tm": "Bir", "img": "numbers/one.png"},
+  {"en": "Two (2)", "jp": "に", "romaji": "Ni", "tm": "Iki", "img": "numbers/two.png"},
+  {"en": "Three (3)", "jp": "さん", "romaji": "San", "tm": "Üç", "img": "numbers/three.png"},
+  {"en": "Four (4)", "jp": "よん", "romaji": "Yon", "tm": "Dört", "img": "numbers/four.png"},
+  {"en": "Five (5)", "jp": "ご", "romaji": "Go", "tm": "Bäş", "img": "numbers/five.png"},
+  {"en": "Six (6)", "jp": "ろく", "romaji": "Roku", "tm": "Alty", "img": "numbers/six.png"},
+  {"en": "Seven (7)", "jp": "なな", "romaji": "Nana", "tm": "Ýedi", "img": "numbers/seven.png"},
+  {"en": "Eight (8)", "jp": "はち", "romaji": "Hachi", "tm": "Sekiz", "img": "numbers/eight.png"},
+  {"en": "Nine (9)", "jp": "きゅう", "romaji": "Kyū", "tm": "Dokuz", "img": "numbers/nine.png"},
+  {"en": "Ten (10)", "jp": "じゅう", "romaji": "Jū", "tm": "On", "img": "numbers/ten.jpg"},
+  {"en": "Zero (0)", "jp": "ぜろ", "romaji": "Zero", "tm": "Nol", "img": "numbers/zero.png"},
+  {"en": "Numbers", "jp": "すうじ", "romaji": "Sūji", "tm": "Sanlar", "img": "numbers/number.png"}
+]

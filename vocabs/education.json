@@ -1,0 +1,72 @@
+[
+  {
+    "en": "Teacher",
+    "jp": "せんせい",
+    "romaji": "Sensei",
+    "tm": "Mugallym",
+    "img": "teacher.png"
+  },
+  {
+    "en": "Student",
+    "jp": "がくせい",
+    "romaji": "Gakusei",
+    "tm": "Talyp",
+    "img": "student.png"
+  },
+  {
+    "en": "School",
+    "jp": "がっこう",
+    "romaji": "Gakkou",
+    "tm": "Mekdep",
+    "img": "school.png"
+  },
+  {
+    "en": "Book",
+    "jp": "ほん",
+    "romaji": "Hon",
+    "tm": "Kitap",
+    "img": "book.png"
+  },
+  {
+    "en": "Notebook",
+    "jp": "ノート",
+    "romaji": "Nōto",
+    "tm": "Depder",
+    "img": "notebook.png"
+  },
+  {
+    "en": "Pen",
+    "jp": "ペン",
+    "romaji": "Pen",
+    "tm": "Galam",
+    "img": "pen.png"
+  },
+  {
+    "en": "Classroom",
+    "jp": "きょうしつ",
+    "romaji": "Kyoushitsu",
+    "tm": "Synp",
+    "img": "classroom.png"
+  },
+  {
+    "en": "Homework",
+    "jp": "しゅくだい",
+    "romaji": "Shukudai",
+    "tm": "Öý işi",
+    "img": "homework.png"
+  },
+  {
+    "en": "Dictionary",
+    "jp": "じしょ",
+    "romaji": "Jisho",
+    "tm": "Sözlik",
+    "img": "dictionary.png"
+  },
+  {
+    "en": "Friend",
+    "jp": "ともだち",
+    "romaji": "Tomodachi",
+    "tm": "Dost",
+    "img": "friend.png"
+  }
+]

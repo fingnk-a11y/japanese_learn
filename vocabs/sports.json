@@ -1,0 +1,14 @@
+[
+  {"en": "Soccer", "jp": "サッカー", "romaji": "Sakkā", "tm": "Futbol", "img": "sports/football.png"},
+  {"en": "Baseball", "jp": "やきゅう", "romaji": "Yakyū", "tm": "Beýzbol", "img": "sports/baseball.png"},
+  {"en": "Tennis", "jp": "テニス", "romaji": "Tenisu", "tm": "Tennis", "img": "sports/tennis.png"},
+  {"en": "Basketball", "jp": "バスケットボール", "romaji": "Basukettobōru", "tm": "Basketbol", "img": "sports/basketball.png"},
+  {"en": "Swimming", "jp": "すいえい", "romaji": "Suiei", "tm": "Ýüzmek", "img": "sports/swimming.png"},
+  {"en": "Volleyball", "jp": "バレーボール", "romaji": "Barēbōru", "tm": "Woleýbol", "img": "sports/volleyball.png"},
+  {"en": "Golf", "jp": "ゴルフ", "romaji": "Gorufu", "tm": "Golf", "img": "sports/golf.png"},
+  {"en": "Running", "jp": "ランニング", "romaji": "Ranningu", "tm": "Ylgaw", "img": "sports/running.png"},
+  {"en": "Table Tennis", "jp": "たっきゅう", "romaji": "Takkyū", "tm": "Stol tennisi", "img": "sports/tabletennis.png"},
+  {"en": "Badminton", "jp": "バドミントン", "romaji": "Badominton", "tm": "Badminton", "img": "sports/badminton.png"},
+  {"en": "Skiing", "jp": "スキー", "romaji": "Skī", "tm": "Şanygy", "img": "sports/skiing.png"},
+  {"en": "Martial Arts", "jp": "ぶどう", "romaji": "Budō", "tm": "Söweş sungaty", "img": "sports/martialarts.png"}
+]

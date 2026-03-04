@@ -1,0 +1,14 @@
+[
+  {"en": "Health", "jp": "けんこう", "romaji": "Kenkō", "tm": "Saglyk", "img": "health/health.png"},
+  {"en": "Hospital", "jp": "びょういん", "romaji": "Byōin", "tm": "Hastanasy / Keselhana", "img": "health/hospital.png"},
+  {"en": "Doctor", "jp": "いしゃ", "romaji": "Isha", "tm": "Lukman", "img": "health/doctor.png"},
+  {"en": "Medicine", "jp": "くすり", "romaji": "Kusuri", "tm": "Derman", "img": "health/medicine.png"},
+  {"en": "Cold (Illness)", "jp": "かぜ", "romaji": "Kaze", "tm": "Sowuklama", "img": "health/cold.png"},
+  {"en": "Fever", "jp": "ねつ", "romaji": "Netsu", "tm": "Gyzdyrma", "img": "health/fever.png"},
+  {"en": "Cough", "jp": "せき", "romaji": "Seki", "tm": "Üsgülewük", "img": "health/cough.png"},
+  {"en": "Headache", "jp": "ずつう", "romaji": "Zutsū", "tm": "Kellagry", "img": "health/headache.png"},
+  {"en": "Stomachache", "jp": "ふくつう", "romaji": "Fukutsū", "tm": "Garynagry", "img": "health/stomachache.png"},
+  {"en": "Dentist", "jp": "はいしゃ", "romaji": "Haisha", "tm": "Diş lukmany", "img": "health/dentist.png"},
+  {"en": "Nurse", "jp": "かんごし", "romaji": "Kangoshi", "tm": "Şepagat uýasy", "img": "health/nurse.png"},
+  {"en": "Pharmacy", "jp": "やっきょく", "romaji": "Yakkyoku", "tm": "Dermanhana", "img": "health/pharmacy.png"}
+]

@@ -1,0 +1,323 @@
+/* --- 1. CORE RESET & VARIABLES --- */
+:root {
+    --header-red: #e63946;
+    --grammar-blue: #00a8ff;
+    --grammar-blue-dark: #0086cc;
+    --dark-navy: #1a1a2e;
+    --bg-light: #f5f8fa;
+    --text-gray: #636e72;
+    --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: var(--bg-light);
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- 2. HEADERS (Hero & Lesson Detail) --- */
+#grammar-hero.hero,
+.lesson-detail-blue {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 140px 20px 100px 20px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#grammar-hero.hero {
+    background: var(--header-red) !important;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+}
+
+.lesson-detail-blue {
+    background: var(--grammar-blue) !important;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    color: white;
+}
+
+/* --- 3. NAVIGATION --- */
+.global-nav {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+}
+
+.nav-right { display: flex; align-items: center; gap: 20px; }
+
+.flag-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+}
+
+.flag-btn img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- 4. THE PREMIUM GRID --- */
+.main-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.grammar-grid {
+    display: grid !important;
+    /* This auto-fill logic prevents cards from getting too small or too big */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 30px;
+    min-height: 400px;
+}
+
+/* --- 5. PREMIUM CARDS --- */
+.grammar-card {
+    background: white;
+    border-radius: 28px;
+    overflow: hidden; /* This forces the blue header to clip to the card's rounded corners */
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important; /* Removes the inner 'cushion' so blue hits the edge */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-blue-header {
+    background: var(--grammar-blue) !important;
+    height: 140px;
+    width: 100%;           /* Fills the card width */
+    margin: 0;              /* Removes any ghost spacing */
+    box-sizing: border-box; /* Forces padding to stay INSIDE the 100% width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lesson-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.big-num {
+    font-size: 3.5rem !important; /* THE FIX: Bold and Large */
+    font-weight: 900;
+    line-height: 0.8;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.big-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 800;
+    opacity: 0.85;
+    margin-top: 5px;
+}
+
+.card-body {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 160px;
+}
+
+.topic-tag {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--grammar-blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(0, 168, 255, 0.08);
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+}
+
+.grammar-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark-navy);
+    line-height: 1.3;
+}
+
+.card-footer-accent {
+    width: 30px; height: 4px;
+    background: var(--grammar-blue);
+    border-radius: 10px;
+    margin-top: 20px;
+    opacity: 0.2;
+    transition: 0.3s;
+}
+
+.grammar-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0, 168, 255, 0.15);
+}
+
+.grammar-card:hover .card-footer-accent { width: 60px; opacity: 1; }
+
+/* --- 6. LESSON DETAIL VIEW --- */
+#lesson-detail-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: none; /* Controlled by JS */
+}
+
+/* THE BLUE HEADER: Hits BOTH edges perfectly */
+.lesson-header.lesson-detail-blue {
+    width: 100% !important;
+    background: var(--grammar-blue) !important;
+    margin: 0 !important;
+    padding: 0 0 60px 0 !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+}
+
+/* NAVIGATION ROW: Mirrors your .global-nav exactly */
+.lesson-nav-placeholder {
+    width: 100%;
+    padding: 25px 40px; /* 40px matches your global-nav padding */
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+/* THE BACK BUTTON: Styled as a premium pill */
+.back-link {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white !important;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 12px 24px !important;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-link:hover {
+    background: white !important;
+    color: var(--grammar-blue) !important;
+    transform: translateX(-5px);
+}
+
+/* --- 7. LESSON CONTENT BODY --- */
+.content-body {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.explanation-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-premium);
+    border-left: 6px solid var(--grammar-blue);
+    text-align: left;
+}
+
+.main-desc { border-left-color: var(--header-red) !important; }
+
+.jp-text { font-size: 1.8rem; font-weight: 600; color: var(--dark-navy); margin-bottom: 10px; }
+.en-text { font-size: 1.1rem; color: var(--text-gray); font-style: italic; }
+
+.formula-banner {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 24px;
+    border-radius: 14px;
+    margin-top: 18px;
+    color: white;
+    font-weight: 700;
+    display: inline-block;
+}
+/* 1. Fix the Detail Container to be full width */
+#lesson-detail-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 2. The Blue Header reaching both edges */
+/* Ensure the parent is truly edge-to-edge */
+#lesson-detail-view {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.lesson-header.lesson-detail-blue {
+    width: 100% !important;
+    background: var(--grammar-blue) !important;
+    margin: 0 !important;
+    padding: 0 0 60px 0 !important;
+    box-sizing: border-box; /* This forces the blue to the right edge */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+}
+
+.lesson-nav-placeholder {
+    width: 100%;
+    padding: 25px 40px; /* This aligns the button with your site's logo/nav */
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.back-link {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white !important;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 12px 24px !important;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: var(--transition);
+}

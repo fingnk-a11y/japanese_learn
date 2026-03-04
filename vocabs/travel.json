@@ -1,0 +1,14 @@
+[
+  { "en": "Airplane", "jp": "ひこうき", "romaji": "Hikōki", "tm": "Uçar", "img": "travel/airplane.png" },
+  { "en": "Train", "jp": "でんしゃ", "romaji": "Densha", "tm": "Otly", "img": "travel/train.png" },
+  { "en": "Bus", "jp": "バス", "romaji": "Basu", "tm": "Awtobus", "img": "travel/bus.png" },
+  { "en": "Taxi", "jp": "タクシー", "romaji": "Takushī", "tm": "Taksi", "img": "travel/taxi.png" },
+  { "en": "Hotel", "jp": "ホテル", "romaji": "Hoteru", "tm": "Myhmanhana", "img": "travel/hotel.png" },
+  { "en": "Passport", "jp": "パスポート", "romaji": "Pasupōto", "tm": "Pasport", "img": "travel/passport.png" },
+  { "en": "Map", "jp": "ちず", "romaji": "Chizu", "tm": "Karta", "img": "travel/map.png" },
+  { "en": "Station", "jp": "えき", "romaji": "Eki", "tm": "Menzil", "img": "travel/station.png" },
+  { "en": "Airport", "jp": "くうこう", "romaji": "Kūkō", "tm": "Howa menzili", "img": "travel/airport.png" },
+  { "en": "Ticket", "jp": "きっぷ", "romaji": "Kippu", "tm": "Bilet", "img": "travel/ticket.png" },
+  { "en": "Bag / Luggage", "jp": "かばん", "romaji": "Kaban", "tm": "Goş / Torba", "img": "travel/bag.png" },
+  { "en": "Travel", "jp": "りょこう", "romaji": "Ryokō", "tm": "Syýahat", "img": "travel/travel.png" }
+]

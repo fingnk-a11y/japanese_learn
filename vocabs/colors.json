@@ -1,0 +1,14 @@
+[
+    { "en": "Red", "jp": "赤", "romaji": "Aka", "tm": "Gyzyl", "img": "colors/red.png", "hex": "#e63946" },
+    { "en": "Blue", "jp": "青", "romaji": "Ao", "tm": "Gök", "img": "colors/blue.png", "hex": "#0984e3" },
+    { "en": "Green", "jp": "緑", "romaji": "Midori", "tm": "Ýaşyl", "img": "colors/green.png", "hex": "#2ecc71" },
+    { "en": "Yellow", "jp": "黄色", "romaji": "Kiiro", "tm": "Sary", "img": "colors/yellow.png", "hex": "#f1c40f" },
+    { "en": "Orange", "jp": "オレンジ", "romaji": "Orenji", "tm": "Mämişi", "img": "colors/orange.png", "hex": "#e67e22" },
+    { "en": "Purple", "jp": "紫", "romaji": "Murasaki", "tm": "Mawy", "img": "colors/purple.png", "hex": "#9b59b6" },
+    { "en": "Pink", "jp": "ピンク", "romaji": "Pinku", "tm": "Gülgun", "img": "colors/pink.png", "hex": "#fd79a8" },
+    { "en": "Brown", "jp": "茶色", "romaji": "Chairo", "tm": "Goňur", "img": "colors/brown.png", "hex": "#a1665e" },
+    { "en": "Black", "jp": "黒", "romaji": "Kuro", "tm": "Gara", "img": "colors/black.png", "hex": "#2d3436" },
+    { "en": "White", "jp": "白", "romaji": "Shiro", "tm": "Ak", "img": "white-circle.png", "hex": "#dfe6e9", "isColor": true},
+    { "en": "Gray", "jp": "灰色", "romaji": "Haiiro", "tm": "Çal", "img": "colors/gray.png", "hex": "#95a5a6" },
+    { "en": "Gold", "jp": "金", "romaji": "Kin", "tm": "Altyn", "img": "colors/gold.png", "hex": "#f1c40f" }
+]
