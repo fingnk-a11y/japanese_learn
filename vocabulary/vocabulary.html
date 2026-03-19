@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NM | Vocabulary Hub</title>
+    <!-- THEME PERSISTENCE GUARD -->
+    <script>
+        (function() {
+            const savedStyle = localStorage.getItem('selectedStyle');
+            if (savedStyle) {
+                document.documentElement.setAttribute('data-theme', savedStyle);
+                // Special handling for anime premium to prevent flash
+                if (savedStyle === 'anime_premium') {
+                    const s = document.createElement('style');
+                    s.textContent = ':root { --primary-red: #BB86FC; --bg-light: #0D1117; } body { background: #0D1117; }';
+                    document.head.appendChild(s);
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <div id="premium-bg" class="premium-bg-container"></div>
+    <header class="hero">
+        <div class="hero-nav-row">
+            <button id="back-btn" onclick="goHome()" class="back-btn-styled">Back</button>
+            <div class="nav-right">
+                <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                    <img id="flag-img" src="../assets/flags/tm.png" alt="Switch Language">
+                </button>
+                <button id="menu-toggle" class="menu-trigger" onclick="toggleMenu(event)">MENU ☰</button>
+                <div id="menu-dropdown" class="menu-dropdown">
+                    <button id="home-menu-btn" class="menu-dropdown-btn" onclick="goHome()">Home</button>
+                    <button id="style-menu-btn" class="menu-dropdown-btn" onclick="changeStyle()">Change Style</button>
+                    <button id="about-menu-btn" class="menu-dropdown-btn" onclick="showAbout()">About</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-main">
+            <h1 id="page-title">Vocabulary Hub</h1>
+            <p id="page-desc">Select a category to start master Japanese words.</p>
+        </div>
+
+        <div id="search-box" class="search-box is-hidden">
+            <span class="search-icon">🔎</span>
+            <input type="text" id="wordSearch" placeholder="Search English or Japanese..." onkeyup="filterWords()">
+            <button id="clear-search" onclick="clearSearch()">✕</button>
+        </div>
+
+        <div id="category-search-box" class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="global-search" placeholder="Search categories..." oninput="executeSearch()">
+            <button id="clear-search-cat" onclick="clearSearch()">✕</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="menu-grid" id="category-menu"></div>
+    </main>
+
+    <!-- modal used by the cards -->
+    <div id="card-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        
+        <div id="modal-media-container">
+            <img id="modal-img" src="" alt="Vocabulary Image">
+            </div>
+
+        <div class="modal-info">
+            <h2 id="modal-jp" class="jp-text"></h2>
+            <p id="modal-romaji" class="romaji-text"></p>
+            <hr>
+            <p id="modal-en" class="en-text"></p>
+        </div>
+
+        <button id="sound-btn" class="btn-primary">
+            <span>🔊 Play Sound</span>
+        </button>
+    </div>
+</div>
+
+    <script src="../app.js"></script>
+    <script src="vocabulary.js"></script>
+    <script src="../search.js"></script>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

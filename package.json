@@ -1,0 +1,31 @@
+{
+  "name": "jpproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "add-tm.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "migrate": "node migrate-to-mongo.js",
+    "theme:upsert": "node manage-theme.js",
+    "theme:upsert:template": "node manage-theme.js ./themes/premium-theme.template.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fingnk-a11y/japanese_learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fingnk-a11y/japanese_learn/issues"
+  },
+  "homepage": "https://github.com/fingnk-a11y/japanese_learn#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongodb": "^7.1.0"
+  }
+}

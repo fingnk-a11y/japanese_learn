@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NM | Kana Master</title>
+    <!-- THEME PERSISTENCE GUARD -->
+    <script>
+        (function() {
+            const savedStyle = localStorage.getItem('selectedStyle');
+            if (savedStyle) {
+                document.documentElement.setAttribute('data-theme', savedStyle);
+                // Special handling for anime premium to prevent flash
+                if (savedStyle === 'anime_premium') {
+                    const s = document.createElement('style');
+                    s.textContent = ':root { --primary-red: #BB86FC; --bg-light: #0D1117; } body { background: #0D1117; }';
+                    document.head.appendChild(s);
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="kana.css">
+</head>
+<body>
+    <div id="premium-bg" class="premium-bg-container"></div>
+    <header class="hero">
+        <div class="hero-nav-row">
+            <button onclick="goHome()" class="back-btn-styled">Back</button>
+            <div class="nav-right">
+                <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                    <img id="flag-img" src="../assets/flags/tm.png" alt="Switch Language">
+                </button>
+                <button id="menu-toggle" class="menu-trigger" onclick="toggleMenu(event)">MENU ☰</button>
+                <div id="menu-dropdown" class="menu-dropdown">
+                    <button id="home-menu-btn" class="menu-dropdown-btn" onclick="goHome()">Home</button>
+                    <button id="style-menu-btn" class="menu-dropdown-btn" onclick="changeStyle()">Change Style</button>
+                    <button id="about-menu-btn" class="menu-dropdown-btn" onclick="showAbout()">About</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-main">
+            <h1>Kana Master</h1>
+            <p>The foundations of Japanese: Let's learn Hiragana and Katakana.</p>
+            
+           <div class="kana-tabs">
+    <button class="tab-btn" data-type="hiragana" onclick="switchKana('hiragana', this)">Hiragana <span class="tab-icon">ひ</span></button>
+    <button class="tab-btn" data-type="katakana" onclick="switchKana('katakana', this)">Katakana <span class="tab-icon">カ</span></button>
+</div>
+        </div>
+    </header>
+
+    <main id="kana-grid" class="kana-grid"></main>
+
+  <div id="card-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+
+        <div class="stroke-container">
+            <img id="stroke-animation" src="" alt="Stroke Order">
+        </div>
+
+        <div class="details-container">
+            <h2 id="modal-romaji"></h2>
+            <p id="modal-en"></p>
+            <button id="sound-btn" class="menu-trigger red-bg">🔊 Hear Sound</button>
+        </div>
+    </div>
+</div>
+
+
+    <script src="../app.js"></script>
+    <script src="kana.js"></script>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

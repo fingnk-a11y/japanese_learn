@@ -1,0 +1,29 @@
+{
+  "id": "info_premium",
+  "name": "Info Premium",
+  "premium": true,
+  "colors": {
+    "bg_main": "#05091a",
+    "bg_card": "#0f1730",
+    "accent_primary": "#f2d024",
+    "accent_secondary": "#2ec4ff",
+    "text_main": "#ffffff",
+    "text_muted": "#c9d1e7",
+    "border_glow": "rgba(242, 208, 36, 0.3)"
+  },
+  "css": {
+    "--hero-gradient": "linear-gradient(135deg, #101a37 0%, #05091a 100%)"
+  },
+  "assets": {
+    "hero_header": "assets/infotheme/informaticsbackground.jpg",
+    "background": "assets/infotheme/background.jpg",
+    "profile_icon": "assets/infotheme/kanji.png",
+    "search_icon": "🔎",
+    "section_icons": [
+      "assets/infotheme/vocabulary.png",
+      "assets/infotheme/quiz.png",
+      "assets/infotheme/grammar.png",
+      "assets/infotheme/kanji.png"
+    ]
+  }
+}

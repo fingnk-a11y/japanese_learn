@@ -4,24 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nihongo Master | Home</title>
+    <script>
+        // THEME PERSISTENCE: Apply saved theme immediately to prevent flash of wrong theme
+        (function() {
+            let savedStyle = localStorage.getItem('selectedStyle');
+            if (!savedStyle) {
+                // First time visitor - set default
+                savedStyle = 'default';
+                localStorage.setItem('selectedStyle', savedStyle);
+            }
+            if (savedStyle) {
+                document.documentElement.setAttribute('data-theme', savedStyle);
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Premium Background Placeholder -->
+    <div id="premium-bg" class="premium-bg-container"></div>
    <header class="hero">
     <div class="hero-nav-row">
-        <button class="profile-btn">
-            <span>👤</span>
+        <button class="profile-btn" id="profileBtn" style="border-radius: 50%; padding: 0; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <span id="header-profile-basic" style="font-size: 1.5rem;">👤</span>
+            <img id="header-profile-img" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" alt="Profile">
         </button>
 
         <div class="nav-right">
-            <button id="theme-toggle" class="flag-btn theme-btn" onclick="toggleTheme()">
-                <span id="theme-icon">🌙</span>
-            </button>
             <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
                 <img id="flag-img" src="assets/flags/tm.png" alt="Switch Language">
             </button>
-            <button class="menu-trigger" onclick="toggleMenu()">MENU ☰</button>
+            <button id="menu-toggle" class="menu-trigger" data-lang-key="menu_btn" onclick="toggleMenu(event)">MENU ☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button id="home-menu-btn" class="menu-dropdown-btn" data-lang-key="home_btn" onclick="goHome()">Home</button>
+                <button id="style-menu-btn" class="menu-dropdown-btn" data-lang-key="style_btn" onclick="changeStyle()">Change Style</button>
+                <button id="about-menu-btn" class="menu-dropdown-btn" data-lang-key="about_btn" onclick="showAbout()">About</button>
+            </div>
         </div>
     </div>
 
@@ -34,78 +53,102 @@
     <main class="main-container">
 
         <section class="menu-section-block">
-    <span class="section-indicator blue">Step 1</span>
-    <h2 class="section-title">The Foundation</h2>
-    <p class="section-desc">Master the two primary writing systems.</p>
+    <span class="section-indicator blue" data-lang-key="step_1_indicator">Step 1</span>
+    <h2 class="section-title" data-lang-key="step_1_title">The Foundation</h2>
+    <p class="section-desc" data-lang-key="step_1_desc">Master the two primary writing systems.</p>
 
     <div class="menu-grid">
-        <a href="kana.html?type=hiragana" class="menu-item">
-            <div class="item-icon-circle blue-bg">あ</div>
+        <a href="kana/kana.html?type=hiragana" class="menu-item">
+            <div class="item-icon-circle blue-bg" data-icon-key="hira_icon">
+                <span class="basic-icon">あ</span>
+                <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+            </div>
             <div class="item-text">
-                <span class="jp">Hiragana</span>
-                <span class="en">Primary alphabet</span>
+                <span class="jp" data-lang-key="hira_label">Hiragana</span>
+                <span class="en" data-lang-key="hira_sub">Primary alphabet</span>
             </div>
         </a>
 
-        <a href="kana.html?type=katakana" class="menu-item">
-            <div class="item-icon-circle red-bg">ア</div>
+        <a href="kana/kana.html?type=katakana" class="menu-item">
+            <div class="item-icon-circle red-bg" data-icon-key="kata_icon">
+                <span class="basic-icon">ア</span>
+                <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+            </div>
             <div class="item-text">
-                <span class="jp">Katakana</span>
-                <span class="en">Foreign words</span>
+                <span class="jp" data-lang-key="kata_label">Katakana</span>
+                <span class="en" data-lang-key="kata_sub">Foreign words</span>
             </div>
         </a>
     </div>
 </section>
 
         <section class="menu-section-block">
-            <div class="section-indicator red">Step 2</div>
+            <div class="section-indicator red" data-lang-key="step_2_indicator">Step 2</div>
             <div class="section-header">
-                <h2 class="section-title">Applied Learning</h2>
-                <p class="section-desc">Move beyond the alphabet into real words and rules.</p>
+                <h2 class="section-title" data-lang-key="step_2_title">Applied Learning</h2>
+                <p class="section-desc" data-lang-key="step_2_desc">Move beyond the alphabet into real words and rules.</p>
             </div>
 
             <div class="menu-grid">
-                <a href="vocabulary.html" class="menu-item">
-                    <div class="item-icon-circle red-bg">📖</div>
-                    <div class="item-text"><span class="jp">単語</span><span class="en">Vocabulary</span></div>
+                <a href="vocabulary/vocabulary.html" class="menu-item">
+                    <div class="item-icon-circle red-bg" data-icon-key="vocab_icon">
+                        <span class="basic-icon">📖</span>
+                        <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+                    </div>
+                    <div class="item-text"><span class="jp">単語</span><span class="en" data-lang-key="vocab_label">Vocabulary</span></div>
                 </a>
-                <a href="grammar.html" class="menu-item">
-                    <div class="item-icon-circle red-bg">⚖️</div>
-                    <div class="item-text"><span class="jp">文法</span><span class="en">Grammar</span></div>
+                <a href="grammar/grammar.html" class="menu-item">
+                    <div class="item-icon-circle red-bg" data-icon-key="grammar_icon">
+                        <span class="basic-icon">⚖️</span>
+                        <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+                    </div>
+                    <div class="item-text"><span class="jp">文法</span><span class="en" data-lang-key="grammar_label">Grammar</span></div>
                 </a>
-                <a href="kanji.html" class="menu-item">
-                    <div class="item-icon-circle red-bg">⛩️</div>
-                    <div class="item-text"><span class="jp">漢字</span><span class="en">Kanji</span></div>
+                <a href="kanji/kanji.html" class="menu-item">
+                    <div class="item-icon-circle red-bg" data-icon-key="kanji_icon">
+                        <span class="basic-icon">⛩️</span>
+                        <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+                    </div>
+                    <div class="item-text"><span class="jp">漢字</span><span class="en" data-lang-key="kanji_label">Kanji</span></div>
                 </a>
             </div>
         </section>
 
         <section class="menu-section-block">
-            <div class="section-indicator gold">Step 3</div>
+            <div class="section-indicator gold" data-lang-key="step_3_indicator">Step 3</div>
             <div class="section-header">
-                <h2 class="section-title">Challenge Zone</h2>
-                <p class="section-desc">Test your memory and earn rewards.</p>
+                <h2 class="section-title" data-lang-key="step_3_title">Challenge Zone</h2>
+                <p class="section-desc" data-lang-key="step_3_desc">Test your memory and earn rewards.</p>
             </div>
 
             <div class="menu-grid">
-                <a href="quiz.html" class="menu-item">
-                    <div class="item-icon-circle gold-bg">🏆</div>
-                    <div class="item-text"><span class="jp">クイズ</span><span class="en">Flash Quiz</span></div>
+                <a href="quiz/quiz.html" class="menu-item">
+                    <div class="item-icon-circle gold-bg" data-icon-key="quiz_icon">
+                        <span class="basic-icon">🏆</span>
+                        <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+                    </div>
+                    <div class="item-text"><span class="jp">クイズ</span><span class="en" data-lang-key="quiz_label">Flash Quiz</span></div>
                 </a>
-                <a href="match-game.html" class="menu-item">
-                    <div class="item-icon-circle gold-bg">🎮</div>
-                    <div class="item-text"><span class="jp">ゲーム</span><span class="en">Memory Match</span></div>
+                <a href="memory-match.html" class="menu-item">
+                    <div class="item-icon-circle gold-bg" data-icon-key="game_icon">
+                        <span class="basic-icon">🎮</span>
+                        <img class="premium-icon" style="display: none; width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" src="" alt="">
+                    </div>
+                    <div class="item-text"><span class="jp">ゲーム</span><span class="en" data-lang-key="game_label">Memory Match</span></div>
                 </a>
             </div>
         </section>
 
     </main>
 
-    <script>
-        function toggleMenu() {
-            alert("Menu functionality coming soon!");
-        }
-    </script>
-<script src="app.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Global Profile Modal system from app.js manages the profile features now -->
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
 </body>
 </html>

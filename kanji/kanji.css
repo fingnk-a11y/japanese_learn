@@ -1,0 +1,340 @@
+/* THE GRID */
+#kanji-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* THE KANJI CARD */
+.kana-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: var(--bg-card);
+    aspect-ratio: 1 / 1; /* Makes them perfect squares */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.kana-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff4b2b; /* A nice "Nihon" Red */
+    box-shadow: 0 8px 25px rgba(255, 75, 43, 0.2);
+}
+
+.kana-char {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.kana-romaji {
+    font-size: 0.8rem;
+    color: #636e72;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Stroke & Main Char side-by-side or stacked */
+.stroke-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+#kanji-stroke {
+    width: 120px;
+    height: 120px;
+    border: 1px dashed #ddd;
+    border-radius: 10px;
+}
+
+.large-kana {
+    font-size: 5rem;
+    line-height: 1;
+    color: #2d3436;
+}
+
+/* Readings Box */
+.readings-box {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.reading-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #ff4b2b;
+    text-transform: uppercase;
+}
+
+.reading-value {
+    font-size: 1.1rem;
+    color: #2d3436;
+}
+
+/* Examples */
+#modal-examples {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+#modal-examples li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ex-word { font-weight: bold; color: #ff4b2b; font-size: 1.1rem; }
+.ex-reading { color: #636e72; font-size: 0.9rem; margin-left: 5px; }
+.ex-meaning { color: #2d3436; }
+.kana-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--primary-red);
+    background: var(--bg-card);
+    color: var(--primary-red);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tab-btn:hover {
+    background: var(--primary-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tab-btn.active {
+    background: var(--primary-red);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Premium theme tab buttons */
+[data-theme="anime_premium"] .tab-btn, [data-theme="starrail_premium"] .tab-btn,
+body.anime-theme .tab-btn {
+    border: 2px solid rgba(187, 134, 252, 0.5);
+    background: rgba(22, 27, 34, 0.6);
+    color: #BB86FC;
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.1);
+}
+
+[data-theme="anime_premium"] .tab-btn, [data-theme="starrail_premium"] .tab-btn:hover,
+body.anime-theme .tab-btn:hover {
+    background: rgba(187, 134, 252, 0.2);
+    border-color: #BB86FC;
+    box-shadow: 0 6px 20px rgba(187, 134, 252, 0.3);
+}
+
+[data-theme="anime_premium"] .tab-btn, [data-theme="starrail_premium"] .tab-btn.active,
+body.anime-theme .tab-btn.active {
+    background: rgba(187, 134, 252, 0.3);
+    border-color: #BB86FC;
+    box-shadow: 0 6px 20px rgba(187, 134, 252, 0.4);
+}
+.search-wrapper {
+    max-width: 100%;
+    margin: 20px auto 40px auto;
+    padding: 0 20px;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 98%;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 5;
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+#kanji-search {
+    width: 100%;
+    padding: 18px 60px 18px 85px;
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#kanji-search::placeholder {
+    color: #999;
+}
+
+#kanji-search:focus {
+    background: #ffffff;
+    border-color: var(--primary-red);
+    box-shadow: 0 15px 35px rgba(230, 57, 70, 0.15);
+}
+
+#clear-search {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+#clear-search:hover {
+    color: var(--primary-red);
+}
+
+.search-box:focus-within #clear-search {
+    display: block;
+}
+
+#kanji-search::placeholder {
+    color: #b2bec3;
+    font-weight: 400;
+}
+
+/* === ANIME THEME SEARCH BAR === */
+[data-theme="anime_premium"] #kanji-search,
+body.anime-theme #kanji-search {
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid rgba(187, 134, 252, 0.2);
+    color: #F0F6FC;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="anime_premium"] #kanji-search:focus,
+body.anime-theme #kanji-search:focus {
+    border-color: #BB86FC;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.2);
+    background: rgba(22, 27, 34, 0.95);
+}
+
+[data-theme="anime_premium"] #kanji-search::placeholder,
+body.anime-theme #kanji-search::placeholder {
+    color: #8B949E;
+}
+
+/* No Results Styling */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #b2bec3;
+}
+
+.no-results p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2d3436;
+}
+
+/* The Level Tag inside the card */
+.level-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: var(--bg-light);          /* theme-aware */
+    color: var(--primary-red);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--text-gray);
+    pointer-events: none; /* Stops the tag from interfering with clicks */
+    transition: background 0.2s, color 0.2s;
+}
+
+.kanji-card {
+    position: relative; /* Context for the level-tag */
+}
+
+/* hover effect for the level badge */
+.kanji-card:hover .level-tag {
+    background: var(--primary-red);
+    color: var(--bg-light);
+}
+
+/* === ANIME THEME KANJI CARDS === */
+[data-theme="anime_premium"] .kana-card, [data-theme="starrail_premium"] .kana-card,
+body.anime-theme .kana-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.9) 0%, rgba(187, 134, 252, 0.05) 100%) !important;
+    border: 1px solid rgba(187, 134, 252, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(187, 134, 252, 0.1);
+}
+
+[data-theme="anime_premium"] .kana-card, [data-theme="starrail_premium"] .kana-card:hover,
+body.anime-theme .kana-card:hover {
+    border-color: #00F2FF !important;
+    box-shadow: 0 12px 40px rgba(187, 134, 252, 0.2), 0 0 30px rgba(0, 242, 255, 0.15);
+    transform: translateY(-5px);
+}
+
+[data-theme="anime_premium"] .kana-char, [data-theme="starrail_premium"] .kana-char,
+body.anime-theme .kana-char {
+    color: #F0F6FC;
+}
+
+[data-theme="anime_premium"] .kana-romaji, [data-theme="starrail_premium"] .kana-romaji,
+body.anime-theme .kana-romaji {
+    color: #8B949E;
+}
+
+[data-theme="anime_premium"] .level-tag, [data-theme="starrail_premium"] .level-tag,
+body.anime-theme .level-tag {
+    background: rgba(187, 134, 252, 0.2);
+    color: #BB86FC;
+    border: 1px solid rgba(187, 134, 252, 0.4);
+}
+
+[data-theme="anime_premium"] .kanji-card, [data-theme="starrail_premium"] .kanji-card:hover .level-tag,
+body.anime-theme .kanji-card:hover .level-tag {
+    background: rgba(187, 134, 252, 0.4);
+    color: #00F2FF;
+    border-color: #00F2FF;
+}
+

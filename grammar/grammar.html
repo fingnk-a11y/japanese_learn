@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Grammar Library</title>
+    <!-- THEME PERSISTENCE GUARD -->
+    <script>
+        (function() {
+            const savedStyle = localStorage.getItem('selectedStyle');
+            if (savedStyle) {
+                document.documentElement.setAttribute('data-theme', savedStyle);
+                // Special handling for anime premium to prevent flash
+                if (savedStyle === 'anime_premium') {
+                    const s = document.createElement('style');
+                    s.textContent = ':root { --primary-red: #BB86FC; --bg-light: #0D1117; } body { background: #0D1117; }';
+                    document.head.appendChild(s);
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="grammar.css">
+</head>
+<body>
+    <div id="premium-bg" class="premium-bg-container"></div>
+
+<header class="hero">
+    <div class="hero-nav-row">
+        <button onclick="goHome()" class="back-btn-styled" data-lang-key="home_btn">Back</button>
+        <div class="nav-right">
+            <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                <img id="flag-img" src="" alt="Switch Language">
+            </button>
+            <button id="menu-toggle" class="menu-trigger" data-lang-key="menu_btn" onclick="toggleMenu(event)">MENU ☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button id="home-menu-btn" class="menu-dropdown-btn" data-lang-key="home_btn" onclick="goHome()">Home</button>
+                <button id="style-menu-btn" class="menu-dropdown-btn" data-lang-key="style_btn" onclick="changeStyle()">Change Style</button>
+                <button id="about-menu-btn" class="menu-dropdown-btn" data-lang-key="about_btn" onclick="showAbout()">About</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-main">
+        <h1 data-lang-key="grammar_label">Grammar Library</h1>
+        <p data-lang-key="grammar_sub">Browse grammar lessons and deepen your understanding.</p>
+    </div>
+</header>
+
+<main>
+    <div id="grid-view-container" class="main-container">
+        <div id="grammar-grid" class="grammar-grid"></div>
+    </div>
+
+    <div id="lesson-detail-view" class="main-container"></div>
+</main>
+
+<script src="../app.js"></script>
+<script src="grammar.js"></script>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

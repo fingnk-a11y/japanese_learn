@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nihongo Master | Memory Match</title>
+    <script>
+        // THEME PERSISTENCE: Apply saved theme immediately to prevent flash of wrong theme
+        (function() {
+            let savedStyle = localStorage.getItem('selectedStyle');
+            if (!savedStyle) {
+                savedStyle = 'default_premium';
+                localStorage.setItem('selectedStyle', savedStyle);
+            }
+            if (savedStyle) {
+                document.documentElement.setAttribute('data-theme', savedStyle);
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="memory-match.css">
+</head>
+<body>
+    <!-- Premium Background Placeholder -->
+    <div id="premium-bg" class="premium-bg-container"></div>
+    <header class="hero">
+        <div class="hero-nav-row">
+            <a href="index.html" class="back-btn-styled">
+                <span class="back-icon">←</span>
+            </a>
+
+            <div class="nav-right">
+                <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                    <img id="flag-img" src="assets/flags/tm.png" alt="Switch Language">
+                </button>
+                <button id="menu-toggle" class="menu-trigger" data-lang-key="menu_btn" onclick="toggleMenu(event)">MENU ☰</button>
+                <div id="menu-dropdown" class="menu-dropdown">
+                    <button id="home-menu-btn" class="menu-dropdown-btn" data-lang-key="home_btn" onclick="goHome()">Home</button>
+                    <button id="style-menu-btn" class="menu-dropdown-btn" data-lang-key="style_btn" onclick="changeStyle()">Change Style</button>
+                    <button id="about-menu-btn" class="menu-dropdown-btn" data-lang-key="about_btn" onclick="showAbout()">About</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-main">
+            <h1>Memory Match 🎮</h1>
+            <p id="hero-subtitle">Master Japanese vocabulary through memory gameplay.</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="memory-match-container">
+            <div class="game-controls">
+
+                <div class="control-group">
+                    <label for="difficulty-select">Difficulty:</label>
+                    <select id="difficulty-select" onchange="changeDifficulty()">
+                        <option value="easy">Easy (6 pairs)</option>
+                        <option value="medium" selected>Medium (8 pairs)</option>
+                        <option value="hard">Hard (12 pairs)</option>
+                    </select>
+                </div>
+                <button class="reset-btn" onclick="resetGame()">New Game</button>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-label">Moves:</span>
+                    <span class="stat-value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Matches:</span>
+                    <span class="stat-value" id="matches">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Timer:</span>
+                    <span class="stat-value" id="timer">0:00</span>
+                </div>
+            </div>
+
+            <div class="memory-game" id="memory-game"></div>
+
+            <div class="game-status" id="game-status"></div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="memory-match.js"></script>
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,106 +1,273 @@
 /* --- 1. DESIGN TOKENS --- */
 :root {
+    /* DEFAULT NEUTRAL COLORS (Applied before JavaScript loads theme from styles.json)
+       This prevents the red flash during page load */
     --primary-red: #e63946;
+    --accent-primary: #e63946;
+    --accent-secondary: #0984e3;
     --dark-navy: #1a1a2e;
     --foundation-blue: #0984e3;
-    --challenge-gold: #f1c40f;
-    --grammar-blue: #0984e3;
-    --text-dark: #2d3436;
-    --text-gray: #636e72;
+    --grammar-blue: #00a8ff;
+    --challenge-gold: #d4af37;
+    --text-gray: #666666;
+    --text-light: #ffffff;
+    --text-light-rgb: 255, 255, 255;
     --bg-light: #f8f9fa;
-    --shadow-premium: 0 15px 40px rgba(0,0,0,0.06);
-    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --bg-main: #fcfdfd;
+    --bg-card: #ffffff;
+    --text-dark: #2d3436;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --hero-gradient: linear-gradient(135deg, #e63946 0%, #b91d2a 100%);
+    --theme-hero-image: none;
+    --hero-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+    --shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --border-glow: rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
 }
 
+/* ALL THEME STYLING IS APPLIED VIA JAVASCRIPT FROM styles.json
+   CSS selectors are no longer used for themes - only JavaScript application */
+
 /* --- 2. GLOBAL RESET --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fcfdfd;
+    background-color: var(--bg-light);
+    background-image: var(--bg-image, none);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
     color: var(--text-dark);
     line-height: 1.6;
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
+}
+
+/* Main content area */
+main,
+.main-container {
+    min-height: 100vh;
 }
 
 /* --- 3. PREMIUM HERO SECTION --- */
-/* --- 3. BULLETPROOF RED HERO --- */
 .hero {
-    /* Hard-coded red gradient to prevent 'white' background issues */
-    background: linear-gradient(135deg, #e63946 0%, #b91d2a 100%) !important;
-    padding: 100px 20px;
+    background: var(--hero-gradient) !important;
+    padding: 130px 20px 100px 20px;
     margin-bottom: 60px;
     border-radius: 0 0 60px 60px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+    box-shadow: var(--hero-shadow);
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* Base card styling */
+.menu-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-glow);
+    border-radius: 20px;
+    padding: 35px 25px;
+    text-align: center;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+
+.hero[style*="display: none"] {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    visibility: hidden !important;
 }
 
 /* Forcing the text to be white so it doesn't disappear */
 .hero h1 {
-    color: #ffffff !important;
+    color: var(--text-light, #ffffff);
     font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 10px;
     display: block;
 }
 
+body[data-theme="starrail_premium"] .hero h1 {
+    color: var(--primary-accent) !important;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+    font-size: 3.5rem !important;
+    font-weight: 900 !important;
+}
+
 .hero p {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(var(--text-light-rgb, 255, 255, 255), 0.9) !important;
     font-size: 1.3rem;
     font-weight: 400;
 }
 
+body[data-theme="starrail_premium"] .hero p {
+    color: #0c0c0c !important;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.9), 1px 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
 .logo-text {
-    color: #ffffff !important;
+    color: var(--text-light) !important;
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+/* Section Anime Icons - positioned in right corner */
+.section-anime-icon {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    opacity: 0.85;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+}
+
+.section-anime-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 1;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
 /* --- 3.1 HERO NAVIGATION LAYOUT --- */
 /* --- 3.1 HERO NAVIGATION LAYOUT --- */
-/* Container to push buttons to far corners */
+/* Container for navigation buttons */
 .hero-nav-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: absolute;
     top: 25px;
     left: 0;
-    right: 0;
-    padding: 0 30px;
     width: 100%;
+    padding: 0 30px;
+    box-sizing: border-box;
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* The Premium Back Button Style */
+/* ===== BACK BUTTON BASE STYLES ===== */
 .back-btn-styled {
     text-decoration: none;
-    color: white !important;
-    font-size: 0.85rem;
+    color: var(--text-light) !important;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 1px;
-
-    /* Glassmorphism Effect */
     background: rgba(255, 255, 255, 0.15);
     padding: 10px 20px;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
-
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     transition: var(--transition);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .back-btn-styled:hover {
     background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-5px); /* Moves left on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    border-color: white;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--text-light);
+}
+
+.back-btn-styled::before {
+    content: "⬅";
+    font-size: 1.1rem;
 }
 
 .back-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* ===== BACK BUTTON ANIME THEME OVERRIDES ===== */
+[data-theme="anime_premium"] .back-btn-styled,
+[data-theme="starrail_premium"] .back-btn-styled,
+body.starrail-theme .back-btn-styled,
+body.anime-theme .back-btn-styled {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.15) 0%, rgba(0, 242, 255, 0.08) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    color: #F0F6FC;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+[data-theme="anime_premium"] .back-btn-styled:hover,
+[data-theme="starrail_premium"] .back-btn-styled:hover,
+body.starrail-theme .back-btn-styled:hover,
+body.anime-theme .back-btn-styled:hover {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.25) 0%, rgba(0, 242, 255, 0.15) 100%);
+    border-color: #00F2FF;
+    color: #00F2FF;
+    box-shadow: 0 6px 20px rgba(187, 134, 252, 0.2);
+    transform: translateX(-3px);
+}
+
+[data-theme="anime_premium"] .back-btn-styled::before,
+[data-theme="starrail_premium"] .back-btn-styled::before,
+body.starrail-theme .back-btn-styled::before,
+body.anime-theme .back-btn-styled::before {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url('assets/animestyle/swicon4.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 4px rgba(187, 134, 252, 0.3));
+    transition: filter 0.3s ease;
+}
+
+[data-theme="anime_premium"] .back-btn-styled:hover::before {
+    filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.5));
+}
+
+[data-theme="anime_premium"] .back-icon,
+[data-theme="starrail_premium"] .back-icon,
+body.starrail-theme .back-icon,
+body.anime-theme .back-icon {
+    font-size: 2.2rem;
 }
 
 /* Style the Menu Trigger Button */
@@ -112,8 +279,13 @@ body {
     border-radius: 12px;
     cursor: pointer;
     font-weight: 700;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     transition: var(--transition);
+    height: 42px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 }
 
 .menu-trigger:hover {
@@ -121,15 +293,236 @@ body {
     transform: translateY(-2px);
 }
 
+/* Anime Premium Menu Trigger Styling */
+[data-theme="anime_premium"] .menu-trigger,
+[data-theme="starrail_premium"] .menu-trigger,
+body.starrail-theme .menu-trigger,
+body.anime-theme .menu-trigger {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.2) 0%, rgba(0, 242, 255, 0.1) 100%);
+    border: 2px solid rgba(187, 134, 252, 0.4);
+    color: #F0F6FC;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.2), inset 0 0 10px rgba(187, 134, 252, 0.05);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="anime_premium"] .menu-trigger:hover,
+[data-theme="starrail_premium"] .menu-trigger:hover,
+body.starrail-theme .menu-trigger:hover,
+body.anime-theme .menu-trigger:hover {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.35) 0%, rgba(0, 242, 255, 0.2) 100%);
+    border-color: #00F2FF;
+    color: #00F2FF;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4), inset 0 0 15px rgba(187, 134, 252, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Star Rail Premium Menu Trigger Styling (Black & Gold) */
+[data-theme="starrail_premium"] .menu-trigger {
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(30, 30, 30, 0.95) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.8);
+    /* Gold border */
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="starrail_premium"] .menu-trigger:hover {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(40, 40, 40, 1) 100%);
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.8), inset 0 0 15px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+/* Star Rail Premium Dropdown Menu Styling */
+[data-theme="starrail_premium"] .menu-dropdown {
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="starrail_premium"] .menu-dropdown-btn {
+    background: transparent;
+    color: #ffffff;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+[data-theme="starrail_premium"] .menu-dropdown-btn:hover {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.15) 0%, transparent 100%);
+    border-left-color: #d4af37;
+    color: #ffd700;
+    padding-left: 28px;
+}
+
+/* ===== PROFILE BUTTON REDESIGN ===== */
+.profile-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.15) 0%, rgba(9, 132, 227, 0.1) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-btn:hover {
+    transform: scale(1.15) rotate(-5deg);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.25) 0%, rgba(9, 132, 227, 0.2) 100%);
+    box-shadow: 0 8px 24px rgba(230, 57, 70, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.profile-btn:hover::before {
+    opacity: 1;
+}
+
+.profile-btn:active {
+    transform: scale(1.08);
+}
+
+/* Anime Premium Profile Button */
+[data-theme="anime_premium"] .profile-btn,
+[data-theme="starrail_premium"] .profile-btn,
+body.starrail-theme .profile-btn,
+body.anime-theme .profile-btn {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.2) 0%, rgba(0, 242, 255, 0.15) 100%);
+    border: 2px solid rgba(187, 134, 252, 0.5);
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.3), inset 0 0 10px rgba(187, 134, 252, 0.1);
+}
+
+[data-theme="anime_premium"] .profile-btn:hover,
+[data-theme="starrail_premium"] .profile-btn:hover,
+body.starrail-theme .profile-btn:hover,
+body.anime-theme .profile-btn:hover {
+    transform: scale(1.15) rotate(-5deg);
+    border-color: #00F2FF;
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.3) 0%, rgba(0, 242, 255, 0.3) 100%);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.6), 0 0 50px rgba(187, 134, 252, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Menu Dropdown Styles */
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    margin-top: 15px;
+    right: 0;
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+    z-index: 1001;
+}
+
+.menu-dropdown.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.menu-dropdown-btn {
+    padding: 12px 20px;
+    border: none;
+    background: var(--bg-card);
+    color: #1a1a2e;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.menu-dropdown-btn:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.menu-dropdown-btn:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.menu-dropdown-btn:hover {
+    background: #f0f0f0;
+    padding-left: 28px;
+}
+
+.style-option-btn {
+    padding: 15px 20px;
+    border: none;
+    background: var(--bg-card);
+    color: #1a1a2e;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.style-option-btn:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-right {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Anime Premium Nav Right */
+[data-theme="anime_premium"] .nav-right,
+[data-theme="starrail_premium"] .nav-right,
+body.starrail-theme .nav-right,
+body.anime-theme .nav-right {
+    gap: 12px;
+    padding: 8px 12px;
+    border: 1px solid rgba(187, 134, 252, 0.2);
+    border-radius: 20px;
+    background: rgba(22, 27, 34, 0.4);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(187, 134, 252, 0.05);
+}
+
 /* --- 4. ORGANIZED SECTION BLOCKS --- */
 .menu-section-block {
-    background: white;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-card);
     max-width: 1050px;
     margin: 0 auto 50px;
     padding: 50px;
     border-radius: 40px;
     box-shadow: var(--shadow-premium);
-    border: 1px solid rgba(0,0,0,0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     position: relative;
     text-align: left;
 }
@@ -138,15 +531,25 @@ body {
 .menu-section-block::before {
     content: "";
     position: absolute;
-    left: 0; top: 40px; bottom: 40px;
+    left: 0;
+    top: 40px;
+    bottom: 40px;
     width: 8px;
     border-radius: 0 10px 10px 0;
 }
 
 /* Color Coding for Steps */
-.menu-section-block:nth-of-type(1)::before { background: var(--foundation-blue); }
-.menu-section-block:nth-of-type(2)::before { background: var(--primary-red); }
-.menu-section-block:nth-of-type(3)::before { background: var(--challenge-gold); }
+.menu-section-block:nth-of-type(1)::before {
+    background: var(--foundation-blue);
+}
+
+.menu-section-block:nth-of-type(2)::before {
+    background: var(--primary-red);
+}
+
+.menu-section-block:nth-of-type(3)::before {
+    background: var(--challenge-gold);
+}
 
 /* --- 5. TITLES & TYPOGRAPHY --- */
 .section-indicator {
@@ -161,9 +564,17 @@ body {
 }
 
 /* Indicator Colors */
-.blue { background: var(--foundation-blue); }
-.red { background: var(--primary-red); }
-.gold { background: var(--challenge-gold); }
+.blue {
+    background: var(--foundation-blue);
+}
+
+.red {
+    background: var(--primary-red);
+}
+
+.gold {
+    background: var(--challenge-gold);
+}
 
 .section-title {
     font-size: 2.5rem;
@@ -187,7 +598,7 @@ body {
 }
 
 .menu-item {
-    background: var(--bg-light);
+    background: var(--bg-card);
     padding: 40px 30px;
     border-radius: 30px;
     text-decoration: none;
@@ -196,19 +607,21 @@ body {
     flex-direction: column;
     align-items: center;
     transition: var(--transition);
-    border: 2px solid transparent;
+    border: 2px solid var(--card-border, transparent);
+    box-shadow: var(--card-shadow, 0 4px 15px rgba(0, 0, 0, 0.03));
 }
 
 .menu-item:hover {
-    background: white;
+    background: var(--card-hover-bg, var(--bg-card));
     transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    border-color: var(--primary-red);
+    box-shadow: var(--card-shadow-hover, 0 20px 40px rgba(0, 0, 0, 0.08));
+    border-color: var(--accent-primary);
 }
 
 /* Icons inside menu items */
 .item-icon-circle {
-    width: 85px; height: 85px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -216,12 +629,20 @@ body {
     font-size: 2.2rem;
     color: white;
     margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.blue-bg { background: var(--foundation-blue); }
-.red-bg { background: var(--primary-red); }
-.gold-bg { background: var(--challenge-gold); }
+.blue-bg {
+    background: var(--accent-secondary);
+}
+
+.red-bg {
+    background: var(--primary-red);
+}
+
+.gold-bg {
+    background: var(--challenge-gold);
+}
 
 .item-text .jp {
     display: block;
@@ -235,50 +656,242 @@ body {
 }
 
 /* --- 7. MOBILE RESPONSIVENESS --- */
+/* Tablet and larger (landscape) - 1024px breakpoint */
+@media (max-width: 1024px) {
+
+    /* Ensure buttons don't overflow on landscape tablets */
+    .hero-nav-row {
+        padding: 0 16px;
+        gap: 14px;
+    }
+
+    .flag-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .menu-trigger {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .hero { padding: 60px 20px; border-radius: 0 0 30px 30px; }
-    .hero h1 { font-size: 2.8rem; }
-    .menu-section-block { padding: 30px 20px; margin: 0 15px 30px; }
-    .section-title { font-size: 1.8rem; }
-    .menu-grid { grid-template-columns: 1fr; }
+    .hero {
+        padding: 60px 20px;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .menu-section-block {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 30px 20px;
+        margin: 0 15px 30px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-anime-icon {
+        width: 110px;
+        height: 110px;
+        top: 15px;
+        right: 20px;
+    }
+
+    /* ===== RESPONSIVE NAVIGATION BUTTONS (TABLET) ===== */
+    .hero-nav-row {
+        padding: 0 12px;
+        gap: 12px;
+    }
+
+    /* Profile button responsive - tablet */
+    .profile-btn {
+        width: 52px;
+        height: 52px;
+        font-size: 1.6rem;
+    }
+
+    /* Flag button responsive - tablet */
+    .flag-btn {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+    }
+
+    .flag-btn img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    /* Menu trigger button responsive - tablet */
+    .menu-trigger {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        height: auto;
+        white-space: nowrap;
+    }
+
+    /* Menu dropdown responsive */
+    .nav-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    /* Menu dropdown positioning */
+    .menu-dropdown {
+        right: 0;
+        min-width: 140px;
+    }
+
+    /* Menu buttons size on tablet */
+    [data-theme="anime_premium"] .menu-dropdown-btn,
+    [data-theme="starrail_premium"] .menu-dropdown-btn,
+    body.starrail-theme .menu-dropdown-btn,
+    body.anime-theme .menu-dropdown-btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Back button responsive - tablet */
+    .back-btn-styled {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+
+    /* Back icon size on tablet for premium */
+    [data-theme="anime_premium"] .back-icon,
+    [data-theme="starrail_premium"] .back-icon,
+    body.starrail-theme .back-icon,
+    body.anime-theme .back-icon {
+        font-size: 1.2rem;
+    }
+
+    /* Menu dropdown button icons responsive sizing */
+    [data-theme="anime_premium"] #home-menu-btn::before,
+    [data-theme="anime_premium"] #style-menu-btn::before,
+    [data-theme="anime_premium"] #about-menu-btn::before {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
 }
-/* --- PREMIUM BACK BUTTON --- */
-.back-btn-styled {
-    text-decoration: none;
-    color: white !important;
-    font-size: 0.95rem;
-    font-weight: 700;
 
-    /* The Button Shell */
-    background: rgba(255, 255, 255, 0.15); /* Glass effect */
-    padding: 10px 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+/* Extra small phones (480px and below) */
+@media (max-width: 480px) {
 
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    /* Very small section icons on tiny phones */
+    .section-anime-icon {
+        width: 80px;
+        height: 80px;
+        top: 10px;
+        right: 15px;
+    }
 
-    /* Animation */
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: blur(5px); /* Frosty glass look */
+    /* ===== RESPONSIVE NAVIGATION BUTTONS (MOBILE PHONE) ===== */
+    .hero-nav-row {
+        padding: 0 8px;
+        gap: 8px;
+        top: 15px;
+    }
+
+    /* Profile button size on very small phones */
+    .profile-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+    }
+
+    /* Flag button size on very small phones */
+    .flag-btn {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+
+    .flag-btn img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    /* Menu trigger button size on very small phones */
+    .menu-trigger {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        height: auto;
+        white-space: nowrap;
+    }
+
+    /* Nav right container spacing */
+    .nav-right {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    /* Menu dropdown responsive positioning */
+    .menu-dropdown {
+        right: -10px;
+        min-width: 130px;
+        max-width: 90vw;
+    }
+
+    /* Back button responsive - phone */
+    .back-btn-styled {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    .back-btn-styled::before {
+        font-size: 0.85rem;
+    }
+
+    /* Back icon size on tiny phones */
+    .back-icon {
+        font-size: 0.9rem;
+    }
+
+    /* Even smaller button icons on very small screens */
+    [data-theme="anime_premium"] #home-menu-btn::before,
+    [data-theme="anime_premium"] #style-menu-btn::before,
+    [data-theme="anime_premium"] #about-menu-btn::before {
+        width: 22px;
+        height: 22px;
+        margin-right: 4px;
+    }
+
+    /* Menu buttons size on mobile phones */
+    [data-theme="anime_premium"] .menu-dropdown-btn,
+    [data-theme="starrail_premium"] .menu-dropdown-btn,
+    body.starrail-theme .menu-dropdown-btn,
+    body.anime-theme .menu-dropdown-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
 }
 
-.back-btn-styled:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateX(-5px); /* Subtle slide to the left */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Make the arrow icon look better */
-.back-btn-styled::before {
-    content: "⬅";
-    font-size: 1.1rem;
-}
 /* Specific styling for Kana cards */
 #kana-grid .menu-item {
     padding: 30px;
-    cursor: default; /* Not a link, just a display card */
+    cursor: default;
+    /* Not a link, just a display card */
 }
 
 #kana-grid .item-icon-circle {
@@ -294,6 +907,7 @@ body {
     color: var(--text-dark);
     text-transform: uppercase;
 }
+
 #category-menu {
     padding: 20px;
     max-width: 1200px;
@@ -301,7 +915,9 @@ body {
 }
 
 .vocab-card {
-    background: white;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: var(--bg-card);
     padding: 40px 20px;
     border-radius: 30px;
     text-decoration: none;
@@ -311,12 +927,56 @@ body {
     text-align: center;
     transition: var(--transition);
     box-shadow: var(--shadow-premium);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .vocab-card:hover {
     transform: translateY(-10px);
     border-color: var(--primary-red);
+}
+
+/* Anime theme vocab cards */
+[data-theme="anime_premium"] .vocab-card,
+[data-theme="starrail_premium"] .vocab-card,
+body.starrail-theme .vocab-card,
+body.anime-theme .vocab-card {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(187, 134, 252, 0.08) 50%, rgba(22, 27, 34, 0.95) 100%);
+    border: 2px solid rgba(187, 134, 252, 0.3);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(187, 134, 252, 0.15),
+        inset 0 1px 0 rgba(187, 134, 252, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="anime_premium"] .vocab-card::before,
+[data-theme="starrail_premium"] .vocab-card::before,
+body.starrail-theme .vocab-card::before,
+body.anime-theme .vocab-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(187, 134, 252, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+[data-theme="anime_premium"] .vocab-card:hover,
+[data-theme="starrail_premium"] .vocab-card:hover,
+body.starrail-theme .vocab-card:hover,
+body.anime-theme .vocab-card:hover {
+    border-color: #00F2FF;
+    transform: translateY(-15px) scale(1.05);
+    box-shadow:
+        0 20px 50px rgba(187, 134, 252, 0.3),
+        0 0 50px rgba(0, 242, 255, 0.25),
+        inset 0 1px 0 rgba(0, 242, 255, 0.2);
 }
 
 .vocab-img {
@@ -326,11 +986,30 @@ body {
     margin-bottom: 20px;
 }
 
+.color-swatch {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.card-text {
+    width: 100%;
+}
+
 .card-text .jp {
     display: block;
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--dark-navy);
+    color: var(--jp-word-color, var(--dark-navy));
+}
+
+.card-text .romaji {
+    font-size: 0rem;
+    display: none;
 }
 
 .card-text .en {
@@ -338,52 +1017,642 @@ body {
     color: var(--text-gray);
     text-transform: capitalize;
 }
+
 /* THE DARK BACKGROUND */
 .modal-overlay {
-    display: none; /* JavaScript switches this to 'flex' */
-    position: fixed; /* Lifts it out of the corner and stays on screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Dim the background */
-    backdrop-filter: blur(8px); /* Modern blur effect */
-    z-index: 9999; /* Higher than any other element */
-
-    /* THE MAGIC: Centers the white card */
+    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    overflow: auto;
+    padding: 20px;
 }
 
-/* THE WHITE CARD */
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 30px;
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-    position: relative; /* Only for the 'X' button positioning */
+.modal-overlay.active {
+    display: flex;
+}
 
-    /* Animation: Makes it pop from the center */
-    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* MODERN PREMIUM CARD */
+.modal-content {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-card);
+    padding: 0;
+    border-radius: 24px;
+    width: 100%;
+    min-width: 350px;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin: auto;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.modal-content:hover {
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-red) 0%, var(--foundation-blue) 100%);
+    z-index: 10;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2,
+.modal-content h3 {
+    color: var(--text-dark);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 @keyframes modalPop {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
-/* Close button positioning */
+/* Close button - modern style */
 .close-modal {
     position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 28px;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
     cursor: pointer;
     color: #999;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 11;
 }
+
+.close-modal:hover {
+    color: var(--primary-red);
+    background: rgba(230, 57, 70, 0.1);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* --- ANIME PREMIUM THEME MODAL STYLING --- */
+[data-theme="anime_premium"] .close-modal,
+[data-theme="starrail_premium"] .close-modal,
+body.starrail-theme .close-modal,
+body.anime-theme .close-modal {
+    color: #BB86FC;
+    background: rgba(187, 134, 252, 0.15);
+    border: 2px solid rgba(187, 134, 252, 0.3);
+    width: 44px;
+    height: 44px;
+    font-size: 28px;
+}
+
+[data-theme="anime_premium"] .close-modal:hover,
+[data-theme="starrail_premium"] .close-modal:hover,
+body.anime-theme .close-modal,
+body.starrail-theme .close-modal:hover {
+    color: #03DAC6;
+    background: rgba(187, 134, 252, 0.25);
+    border-color: rgba(3, 218, 198, 0.5);
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+    transform: rotate(90deg) scale(1.15);
+}
+
+[data-theme="anime_premium"] #modal-media-container {
+    background: rgba(22, 27, 34, 0.6);
+    border-bottom: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] .modal-content,
+[data-theme="starrail_premium"] .modal-content,
+body.starrail-theme .modal-content,
+body.anime-theme .modal-content {
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.95) 0%, rgba(15, 20, 41, 0.95) 100%);
+    border: 2px solid rgba(187, 134, 252, 0.3);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 30px rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] #modal-jp {
+    color: #BB86FC;
+}
+
+[data-theme="anime_premium"] #modal-romaji {
+    color: #03DAC6;
+}
+
+[data-theme="anime_premium"] #modal-en {
+    color: #8B949E;
+}
+
+[data-theme="anime_premium"] .modal-info hr {
+    border-top-color: rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] .modal-overlay,
+[data-theme="starrail_premium"] .modal-overlay,
+body.starrail-theme .modal-overlay,
+body.anime-theme .modal-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+/* Profile image display inside modal - responsive and non-interactive visuals */
+.profile-image-display {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    box-shadow: 0 12px 30px rgba(230, 57, 70, 0.25);
+    cursor: default;
+    border: 8px solid var(--primary-red);
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Theme-specific profile image display borders */
+[data-theme="default"] .profile-image-display {
+    border-color: #e63946;
+    box-shadow: 0 12px 30px rgba(230, 57, 70, 0.25);
+}
+
+[data-theme="ocean"] .profile-image-display {
+    border-color: var(--primary-red);
+    box-shadow: 0 12px 30px rgba(0, 119, 190, 0.25);
+}
+
+[data-theme="sunset"] .profile-image-display {
+    border-color: var(--primary-red);
+    box-shadow: 0 12px 30px rgba(255, 107, 53, 0.25);
+}
+
+[data-theme="forest"] .profile-image-display {
+    border-color: var(--primary-red);
+    box-shadow: 0 12px 30px rgba(45, 80, 22, 0.25);
+}
+
+[data-theme="purple"] .profile-image-display {
+    border-color: var(--primary-red);
+    box-shadow: 0 12px 30px rgba(107, 70, 193, 0.25);
+}
+
+[data-theme="anime_premium"] .profile-image-display,
+[data-theme="starrail_premium"] .profile-image-display,
+body.starrail-theme .profile-image-display,
+body.anime-theme .profile-image-display {
+    border-color: #BB86FC;
+    box-shadow: 0 12px 30px rgba(187, 134, 252, 0.35);
+}
+
+.avatar-frame-overlay {
+    object-fit: contain;
+    width: 120%;
+    height: 120%;
+    border-radius: 50%;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    z-index: 2;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 700px) {
+    .profile-image-display {
+        width: 160px;
+        height: 160px;
+        font-size: 80px;
+        border-width: 10px;
+    }
+
+    #profile-display-box {
+        max-width: 320px;
+        min-width: 260px;
+        left: 110px;
+    }
+
+    #profile-display-box .username {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 992px) {
+    #profile-display-box {
+        max-width: 300px;
+        min-width: 240px;
+        left: 105px;
+    }
+}
+
+@media (max-width: 768px) {
+    #profile-display-box {
+        max-width: 280px;
+        min-width: 220px;
+        left: 95px;
+        gap: 14px;
+        padding: 12px 18px;
+    }
+
+    #profile-display-box .profile-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    #profile-display-box .username {
+        font-size: 0.85rem;
+    }
+
+    #profile-display-box .subtitle {
+        font-size: 0.68rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #profile-display-box {
+        max-width: 260px;
+        min-width: 200px;
+        left: 80px;
+        gap: 12px;
+        padding: 11px 16px;
+    }
+
+    #profile-display-box .profile-img {
+        width: 54px;
+        height: 54px;
+    }
+
+    #profile-display-box .username {
+        font-size: 0.8rem;
+    }
+
+    #profile-display-box .subtitle {
+        font-size: 0.65rem;
+    }
+}
+
+/* Ensure no transform/scale on hover for profile image */
+.profile-image-display:hover {
+    transform: none !important;
+}
+
+/* Theme-aware Avatar Selection Buttons */
+.avatar-selection-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    border: 2px solid var(--primary-red);
+    border-radius: 10px;
+    background: rgba(230, 57, 70, 0.05);
+    color: var(--text-dark);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatar-selection-btn:hover {
+    background: rgba(230, 57, 70, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(230, 57, 70, 0.2);
+}
+
+.avatar-selection-btn.active {
+    border-color: var(--primary-red);
+    background: var(--primary-red);
+    color: white;
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+}
+
+/* Ocean Theme Avatar Buttons */
+[data-theme="ocean"] .avatar-selection-btn {
+    border-color: var(--primary-red);
+    background: rgba(0, 119, 190, 0.05);
+}
+
+[data-theme="ocean"] .avatar-selection-btn:hover {
+    background: rgba(0, 119, 190, 0.15);
+    box-shadow: 0 6px 16px rgba(0, 119, 190, 0.2);
+}
+
+[data-theme="ocean"] .avatar-selection-btn.active {
+    border-color: var(--primary-red);
+    background: var(--primary-red);
+    box-shadow: 0 8px 20px rgba(0, 119, 190, 0.4);
+}
+
+/* Sunset Theme Avatar Buttons */
+[data-theme="sunset"] .avatar-selection-btn {
+    border-color: var(--primary-red);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+[data-theme="sunset"] .avatar-selection-btn:hover {
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 6px 16px rgba(255, 107, 53, 0.2);
+}
+
+[data-theme="sunset"] .avatar-selection-btn.active {
+    border-color: var(--primary-red);
+    background: var(--primary-red);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* Forest Theme Avatar Buttons */
+[data-theme="forest"] .avatar-selection-btn {
+    border-color: var(--primary-red);
+    background: rgba(45, 80, 22, 0.05);
+}
+
+[data-theme="forest"] .avatar-selection-btn:hover {
+    background: rgba(45, 80, 22, 0.15);
+    box-shadow: 0 6px 16px rgba(45, 80, 22, 0.2);
+}
+
+[data-theme="forest"] .avatar-selection-btn.active {
+    border-color: var(--primary-red);
+    background: var(--primary-red);
+    box-shadow: 0 8px 20px rgba(45, 80, 22, 0.4);
+}
+
+/* Purple Theme Avatar Buttons */
+[data-theme="purple"] .avatar-selection-btn {
+    border-color: var(--primary-red);
+    background: rgba(107, 70, 193, 0.05);
+}
+
+[data-theme="purple"] .avatar-selection-btn:hover {
+    background: rgba(107, 70, 193, 0.15);
+    box-shadow: 0 6px 16px rgba(107, 70, 193, 0.2);
+}
+
+[data-theme="purple"] .avatar-selection-btn.active {
+    border-color: var(--primary-red);
+    background: var(--primary-red);
+    box-shadow: 0 8px 20px rgba(107, 70, 193, 0.4);
+}
+
+/* Anime Premium Theme Avatar Buttons */
+[data-theme="anime_premium"] .avatar-selection-btn,
+[data-theme="starrail_premium"] .avatar-selection-btn,
+body.starrail-theme .avatar-selection-btn,
+body.anime-theme .avatar-selection-btn {
+    border-color: #BB86FC;
+    background: rgba(187, 134, 252, 0.1);
+    color: #E1E1E1;
+}
+
+[data-theme="anime_premium"] .avatar-selection-btn:hover,
+[data-theme="starrail_premium"] .avatar-selection-btn:hover,
+body.starrail-theme .avatar-selection-btn:hover,
+body.anime-theme .avatar-selection-btn:hover {
+    background: rgba(187, 134, 252, 0.2);
+    box-shadow: 0 6px 20px rgba(187, 134, 252, 0.3);
+}
+
+[data-theme="anime_premium"] .avatar-selection-btn.active {
+    border-color: #BB86FC;
+    background: #BB86FC;
+    color: white;
+    box-shadow: 0 8px 25px rgba(187, 134, 252, 0.5);
+}
+
+/* Modal media container */
+#modal-media-container {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, var(--bg-light) 0%, rgba(230, 57, 70, 0.05) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Modal image styling */
+#modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Modal info section */
+.modal-info {
+    text-align: center;
+    padding: 40px 35px 35px;
+}
+
+.modal-info hr {
+    border: none;
+    border-top: 1px solid var(--bg-light);
+    margin: 18px 0;
+    opacity: 0.6;
+}
+
+/* Hide any leftover emoji buttons in profile modal if present */
+#profile-modal .emoji-btn {
+    display: none !important;
+}
+
+/* Modal text styling */
+#modal-jp {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--jp-word-color, var(--accent-primary));
+    margin: 0 0 8px 0;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    word-break: break-word;
+}
+
+#modal-romaji {
+    color: var(--modal-romaji-color, var(--foundation-blue));
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.85;
+}
+
+#modal-en {
+    font-size: 1.15rem;
+    color: var(--modal-en-color, var(--text-gray));
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Sound button styling */
+.sound-trigger,
+.btn-primary {
+    margin-top: 28px;
+    margin-bottom: 8px;
+    padding: 13px 40px;
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--foundation-blue) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 24px rgba(230, 57, 70, 0.3);
+    display: inline-block;
+    font-family: inherit;
+}
+
+.sound-trigger:hover,
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(230, 57, 70, 0.4);
+}
+
+.sound-trigger:active,
+.btn-primary:active {
+    transform: translateY(-2px);
+}
+
+[data-theme="anime_premium"] .sound-trigger,
+[data-theme="starrail_premium"] .sound-trigger,
+body.anime-theme .sound-trigger,
+body.starrail-theme .sound-trigger,
+[data-theme="anime_premium"] .btn-primary,
+[data-theme="starrail_premium"] .btn-primary,
+body.starrail-theme .btn-primary,
+body.anime-theme .btn-primary {
+    background: linear-gradient(135deg, #BB86FC 0%, #03DAC6 100%);
+    box-shadow: 0 8px 24px rgba(187, 134, 252, 0.4);
+}
+
+[data-theme="anime_premium"] .sound-trigger:hover,
+[data-theme="starrail_premium"] .sound-trigger:hover,
+body.anime-theme .sound-trigger,
+body.starrail-theme .sound-trigger:hover,
+[data-theme="anime_premium"] .btn-primary:hover,
+[data-theme="starrail_premium"] .btn-primary:hover,
+body.anime-theme .btn-primary,
+body.starrail-theme .btn-primary:hover {
+    box-shadow: 0 12px 32px rgba(187, 134, 252, 0.5);
+}
+
+/* Responsive modal styling */
+@media (max-width: 600px) {
+    .modal-content {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0;
+        border-radius: 20px;
+        max-width: 90vw;
+    }
+
+    #modal-media-container {
+        height: 160px;
+    }
+
+    #modal-img {
+        height: 100%;
+    }
+
+    .modal-info {
+        padding: 30px 24px 24px;
+    }
+
+    .close-modal {
+        top: 12px;
+        right: 12px;
+        font-size: 22px;
+        width: 36px;
+        height: 36px;
+    }
+
+    #modal-jp {
+        font-size: 2.2rem;
+        margin-bottom: 6px;
+    }
+
+    #modal-romaji {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    #modal-en {
+        font-size: 1rem;
+    }
+
+    .modal-info hr {
+        margin: 14px 0;
+    }
+
+    .sound-trigger,
+    .btn-primary {
+        margin-top: 22px;
+        padding: 11px 32px;
+        font-size: 0.95rem;
+    }
+}
+
 /* Make the character in the modal look massive and artistic */
 #modal-kanji-main {
     font-size: 5rem;
@@ -397,7 +1666,8 @@ body {
 .readings-box {
     display: flex;
     justify-content: space-around;
-    background: #fdf2f2; /* Very light red tint */
+    background: #fdf2f2;
+    /* Very light red tint */
     border-radius: 15px;
     padding: 15px;
     margin: 20px 0;
@@ -417,6 +1687,7 @@ body {
     font-weight: 600;
     color: #333;
 }
+
 /* GLOBAL SEARCH BAR */
 /* Ensure the container is the "anchor" for the icon */
 /* This centers the search box in your Hero header */
@@ -427,8 +1698,8 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 98%;
+    margin: 50px auto 0;
 }
 
 /* The Magnifying Glass */
@@ -441,17 +1712,48 @@ body {
     z-index: 5;
 }
 
-/* The Input Field */
-#global-search {
-    width: 100%;
-    padding: 12px 45px 12px 40px; /* Space for icon (left) and clear button (right) */
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    outline: none;
+.search-icon.search-icon-has-image {
+    width: 42px;
+    height: 42px;
 }
 
-/* The X Button */
-#clear-search {
+.search-icon .theme-search-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* The Input Field */
+/* Both search inputs - shared styling */
+#global-search,
+#wordSearch {
+    width: 100%;
+    padding: 18px 25px 18px 85px;
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#global-search::placeholder,
+#wordSearch::placeholder {
+    color: #999;
+}
+
+#global-search:focus,
+#wordSearch:focus {
+    background: #ffffff;
+    border-color: var(--primary-red);
+    box-shadow: 0 15px 35px rgba(230, 57, 70, 0.15);
+}
+
+/* Clear buttons - shared styling */
+#clear-search,
+#clear-search-cat {
     position: absolute;
     right: 15px;
     top: 50%;
@@ -461,35 +1763,16 @@ body {
     font-size: 20px;
     cursor: pointer;
     color: #888;
-    display: none; /* Controlled by app.js */
+    display: none;
+    transition: all 0.3s ease;
 }
 
-#clear-search:hover { color: #ff4b2b; }
-/* --- MOBILE NAVIGATION TWEAKS --- */
-@media (max-width: 768px) {
-    /* Reduce the container padding so buttons don't touch the screen edge */
-    .hero-nav-row {
-        padding: 0 15px;
-        top: 15px;
-    }
-
-    .back-btn-styled {
-        padding: 8px 14px; /* Slimmer padding */
-        font-size: 0.75rem; /* Smaller text */
-        gap: 5px; /* Tighter gap between arrow and text */
-        border-radius: 10px;
-    }
-
-    .back-icon {
-        font-size: 0.9rem;
-    }
-
-    .menu-trigger {
-        padding: 8px 14px;
-        font-size: 0.75rem;
-        border-radius: 10px;
-    }
+#clear-search:hover,
+#clear-search-cat:hover {
+    color: #ff4b2b;
+    transform: translateY(-50%) scale(1.1);
 }
+
 /* add simple loading indicator used by several pages */
 .loading {
     color: var(--text-dark);
@@ -515,13 +1798,16 @@ body {
     align-items: center;
     padding: 0 20px;
     z-index: 1000;
-    pointer-events: none; /* Allows clicking hero content behind it */
+    pointer-events: none;
+    /* Allows clicking hero content behind it */
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
     display: flex;
     gap: 12px;
-    pointer-events: auto; /* Re-enables clicking for buttons */
+    pointer-events: auto;
+    /* Re-enables clicking for buttons */
 }
 
 /* Circular Flag Buttons */
@@ -537,41 +1823,38 @@ body {
     z-index: 1000;
 }
 
-.flag-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    overflow: hidden;
-    cursor: pointer;
-    padding: 0;
-    background: none;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Profile button styling */
+.profile-btn-container {
+    position: relative;
+    display: inline-block;
 }
 
-/* Profile button styling */
-.profile-btn {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
+.profile-btn-container:hover #profile-display-box {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+/* Emoji Button Styling for Profile Modal */
+.emoji-btn {
+    background: var(--bg-card);
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    padding: 0;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 0;
 }
 
-.profile-btn:hover {
-    transform: scale(1.15) rotate(5deg);
-    border-color: white;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+.emoji-btn:hover {
+    transform: scale(1.15);
+    border-color: var(--primary-red);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.2);
 }
 
 /* theme toggle inherits the same circular style */
@@ -580,78 +1863,13 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .theme-btn #theme-icon {
     font-size: 1.2rem;
 }
 
-/* ---------- DARK MODE STYLES ---------- */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-body.dark-mode .hero {
-    background: linear-gradient(135deg, #8B7500 0%, #5C4D00 100%) !important;
-}
-body.dark-mode .menu-section-block {
-    background: #1f1f1f;
-    color: #e0e0e0;
-    border: 1px solid #333;
-}
-body.dark-mode .section-title {
-    color: #ffffff;
-}
-body.dark-mode .menu-item {
-    background: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #444;
-}
-body.dark-mode .back-btn-styled,
-body.dark-mode .menu-trigger {
-    background: rgba(255,255,255,0.1);
-}
-body.dark-mode .vocab-card,
-body.dark-mode .grammar-card {
-    background: #1e1e1e;
-    color: #e0e0e0;
-}
-body.dark-mode .modal-content {
-    background: #2a2a2a;
-}
-/* Kanji/kana specific overrides */
-body.dark-mode .kana-card {
-    background: #2a2a2a;
-    border-color: #444;
-}
-body.dark-mode .kana-char,
-body.dark-mode .kana-romaji,
-body.dark-mode .large-kana,
-body.dark-mode .reading-label,
-body.dark-mode .reading-value,
-body.dark-mode .ex-word,
-body.dark-mode .ex-reading,
-body.dark-mode .ex-meaning,
-body.dark-mode .tab-btn,
-body.dark-mode .tab-btn.active,
-body.dark-mode #kanji-search,
-body.dark-mode .no-results,
-body.dark-mode .no-results p,
-body.dark-mode .level-tag {
-    color: #e0e0e0 !important;
-}
-
-body.dark-mode .tab-btn {
-    background: #444;
-}
-body.dark-mode .tab-btn.active {
-    background: #e63946;
-}
-
-body.dark-mode .search-box {
-    background: #1a1a1a;
-    border-color: #444;
-}
-
-/* add additional overrides as you expand dark support */
+/* ---------- STYLE SYSTEM ---------- */
+/* Styles are now applied dynamically via JavaScript using CSS custom properties */
 
 .flag-btn:hover {
     transform: scale(1.15) rotate(5deg);
@@ -660,7 +1878,9 @@ body.dark-mode .search-box {
 }
 
 .menu-btn {
-    background: rgba(26, 26, 46, 0.8); /* Dark navy with slight transparency */
+    background: rgba(26, 26, 46, 0.8);
+    /* Dark navy with slight transparency */
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -688,8 +1908,10 @@ body.dark-mode .search-box {
     align-items: center;
 }
 
-.back-to-list, .nav-arrow-btn {
+.back-to-list,
+.nav-arrow-btn {
     background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     color: white !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -705,32 +1927,37 @@ body.dark-mode .search-box {
 }
 
 /* Specific Hover Logic */
-.back-to-list:hover, .nav-arrow-btn:hover {
-    background: white;
+.back-to-list:hover,
+.nav-arrow-btn:hover {
+    background: var(--bg-card);
     color: var(--grammar-blue) !important;
-    transform: translateX(-5px); /* Moves left to indicate "going back" */
+    transform: translateX(-5px);
+    /* Moves left to indicate "going back" */
 }
 
 /* Next button moves right on hover */
 .nav-arrow-btn.next-btn:hover {
     transform: translateX(5px);
 }
+
 /* --- SIDEBAR DRAWER --- */
 .side-menu {
     position: fixed;
     top: 0;
-    right: -320px; /* Start hidden */
+    right: -320px;
+    /* Start hidden */
     width: 300px;
     height: 100%;
     background: var(--dark-navy);
     z-index: 2000;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     padding: 100px 40px;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
 }
 
 .side-menu.active {
-    transform: translateX(-320px); /* Slide in */
+    transform: translateX(-320px);
+    /* Slide in */
 }
 
 .menu-overlay {
@@ -739,7 +1966,8 @@ body.dark-mode .search-box {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     display: none;
     z-index: 1500;
@@ -747,6 +1975,24 @@ body.dark-mode .search-box {
 
 .menu-overlay.active {
     display: block;
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.inline-link-button {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.menu-item-disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.menu-item-disabled:hover {
+    transform: none;
 }
 
 .menu-links a {
@@ -762,6 +2008,7 @@ body.dark-mode .search-box {
 .menu-links a:hover {
     color: var(--grammar-blue);
 }
+
 /* flag menus */
 .global-nav {
     position: absolute;
@@ -772,7 +2019,8 @@ body.dark-mode .search-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 9999; /* Stay above everything */
+    z-index: 9999;
+    /* Stay above everything */
 }
 
 .flag-btn {
@@ -791,4 +2039,1217 @@ body.dark-mode .search-box {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Anime Premium Flag Button */
+[data-theme="anime_premium"] .flag-btn,
+[data-theme="starrail_premium"] .flag-btn,
+body.starrail-theme .flag-btn,
+body.anime-theme .flag-btn {
+    border: 2px solid rgba(187, 134, 252, 0.6);
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.15) 0%, rgba(0, 242, 255, 0.1) 100%);
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.3), inset 0 0 10px rgba(187, 134, 252, 0.1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="anime_premium"] .flag-btn:hover,
+[data-theme="starrail_premium"] .flag-btn:hover,
+body.starrail-theme .flag-btn:hover,
+body.anime-theme .flag-btn:hover {
+    border-color: #00F2FF;
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.25) 0%, rgba(0, 242, 255, 0.2) 100%);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.5), inset 0 0 15px rgba(187, 134, 252, 0.2);
+    transform: scale(1.2) rotate(8deg);
+}
+
+[data-theme="anime_premium"] .flag-btn img {
+    filter: brightness(1.1) drop-shadow(0 0 8px rgba(187, 134, 252, 0.3));
+}
+
+/* --- ANIME THEME SPECIFIC STYLES --- */
+/* These styles activate when anime theme is applied */
+
+/* === BODY & BACKGROUND === */
+[data-theme="anime_premium"] {
+    color: var(--text-dark);
+    background-image: url('assets/animestyle/hsrbackground.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Dark overlay on top of background image */
+[data-theme="anime_premium"]::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.7);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* === HERO === */
+body.premium-theme .hero,
+[data-theme="anime_premium"] .hero,
+[data-theme="starrail_premium"] .hero,
+body.starrail-theme .hero,
+body.anime-theme .hero {
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.4) 0%, rgba(187, 134, 252, 0.3) 50%, rgba(0, 242, 255, 0.2) 100%) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(187, 134, 252, 0.4), inset 0 0 20px rgba(187, 134, 252, 0.1) !important;
+    position: relative !important;
+    overflow: visible;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 130px 20px 100px 20px;
+}
+
+/* Minimal scanline effect */
+[data-theme="anime_premium"] .hero::before,
+[data-theme="starrail_premium"] .hero::before,
+body.starrail-theme .hero::before,
+body.anime-theme .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(0deg,
+            rgba(187, 134, 252, 0.02) 0px,
+            rgba(187, 134, 252, 0.02) 1px,
+            transparent 1px,
+            transparent 3px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+[data-theme="anime_premium"] .hero-main,
+[data-theme="starrail_premium"] .hero-main,
+body.starrail-theme .hero-main,
+body.anime-theme .hero-main {
+    position: relative;
+    z-index: 2;
+}
+
+[data-theme="anime_premium"] .hero h1 {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #BB86FC 0%, #00F2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(187, 134, 252, 0.2);
+    font-size: 3.5rem !important;
+    font-weight: 900 !important;
+}
+
+[data-theme="anime_premium"] .hero p {
+    position: relative;
+    z-index: 2;
+    color: rgba(240, 246, 252, 0.8) !important;
+    font-size: 1.15rem;
+}
+
+/* Use DB-configured artwork for the top header when assets.hero_header is present. */
+body.theme-header-image .hero {
+    background-image: linear-gradient(135deg, rgba(6, 10, 24, 0.35) 0%, rgba(6, 10, 24, 0.58) 100%), var(--theme-hero-image) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
+
+/* === MASCOT / CHARACTER IMAGE === */
+#mascot-display {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(187, 134, 252, 0.4));
+    opacity: 0.9;
+}
+
+@keyframes premium-entrance {
+    0% {
+        transform: translateY(40px) scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-5px) scale(1.02);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.9;
+    }
+}
+
+.premium-entrance-animation {
+    animation: premium-entrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* === SECTION BLOCKS === */
+[data-theme="anime_premium"] .menu-section-block,
+[data-theme="starrail_premium"] .menu-section-block,
+body.starrail-theme .menu-section-block,
+body.anime-theme .menu-section-block {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(187, 134, 252, 0.05) 50%, rgba(22, 27, 34, 0.95) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.25);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(187, 134, 252, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* Section indicator with enhanced styling */
+[data-theme="anime_premium"] .section-indicator,
+[data-theme="starrail_premium"] .section-indicator,
+body.starrail-theme .section-indicator,
+body.anime-theme .section-indicator {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.15) 0%, rgba(0, 242, 255, 0.08) 100%);
+    color: #BB86FC;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.15);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Section titles with gradient text */
+[data-theme="anime_premium"] .section-title,
+[data-theme="starrail_premium"] .section-title,
+body.starrail-theme .section-title,
+body.anime-theme .section-title {
+    background: linear-gradient(135deg, #BB86FC 0%, #00F2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+[data-theme="anime_premium"] .section-desc,
+[data-theme="starrail_premium"] .section-desc,
+body.starrail-theme .section-desc,
+body.anime-theme .section-desc {
+    color: #8B949E;
+}
+
+/* === MENU ITEMS (CARDS) === */
+[data-theme="anime_premium"] .menu-item,
+[data-theme="starrail_premium"] .menu-item,
+body.starrail-theme .menu-item,
+body.anime-theme .menu-item {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(187, 134, 252, 0.05) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.25);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 0 15px rgba(187, 134, 252, 0.02);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="anime_premium"] .menu-item:hover,
+[data-theme="starrail_premium"] .menu-item:hover,
+body.starrail-theme .menu-item:hover,
+body.anime-theme .menu-item:hover {
+    transform: translateY(-8px);
+    border-color: #00F2FF;
+    box-shadow:
+        0 15px 40px rgba(187, 134, 252, 0.2),
+        inset 0 0 20px rgba(187, 134, 252, 0.05),
+        0 0 25px rgba(0, 242, 255, 0.15);
+}
+
+[data-theme="anime_premium"] .menu-item .item-icon-circle {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.2) 0%, rgba(0, 242, 255, 0.08) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.15);
+    color: #F0F6FC;
+    font-weight: 800;
+}
+
+[data-theme="anime_premium"] .menu-item:hover .item-icon-circle {
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.3);
+}
+
+[data-theme="anime_premium"] .menu-item .item-text .jp {
+    color: #F0F6FC;
+    font-weight: 600;
+}
+
+[data-theme="anime_premium"] .menu-item .item-text .en,
+[data-theme="anime_premium"] .menu-item .item-text .en {
+    color: #8B949E;
+}
+
+/* Icon circles in anime theme */
+[data-theme="anime_premium"] .item-icon-circle.blue-bg {
+    background: linear-gradient(135deg, #BB86FC, #9B59FC);
+    box-shadow: 0 4px 15px rgba(187, 134, 252, 0.4);
+}
+
+[data-theme="anime_premium"] .item-icon-circle.red-bg {
+    background: linear-gradient(135deg, #00F2FF, #00C4CC);
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.4);
+}
+
+[data-theme="anime_premium"] .item-icon-circle.gold-bg {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* === MODAL STYLING === */
+[data-theme="anime_premium"] .modal-content,
+[data-theme="starrail_premium"] .modal-content,
+body.starrail-theme .modal-content,
+body.anime-theme .modal-content {
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.97) 0%, rgba(22, 27, 34, 0.97) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(187, 134, 252, 0.15);
+}
+
+[data-theme="anime_premium"] .modal-content::before,
+[data-theme="starrail_premium"] .modal-content::before,
+body.anime-theme .modal-content,
+body.starrail-theme .modal-content::before {
+    background: linear-gradient(90deg, #BB86FC 0%, #00F2FF 100%);
+}
+
+[data-theme="anime_premium"] .modal-overlay,
+[data-theme="starrail_premium"] .modal-overlay,
+body.starrail-theme .modal-overlay,
+body.anime-theme .modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="anime_premium"] .close-modal,
+[data-theme="starrail_premium"] .close-modal,
+body.starrail-theme .close-modal,
+body.anime-theme .close-modal {
+    color: #8B949E;
+    background: rgba(187, 134, 252, 0.1);
+    border: 1px solid rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] .close-modal:hover,
+[data-theme="starrail_premium"] .close-modal:hover,
+body.anime-theme .close-modal,
+body.starrail-theme .close-modal:hover {
+    background: rgba(187, 134, 252, 0.2);
+    color: #BB86FC;
+    border-color: #BB86FC;
+}
+
+[data-theme="anime_premium"] #modal-media-container,
+[data-theme="anime_premium"] #modal-media-container {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.1), rgba(0, 242, 255, 0.05));
+}
+
+[data-theme="anime_premium"] #modal-jp,
+[data-theme="anime_premium"] #modal-jp {
+    color: var(--jp-word-color, #F0F6FC);
+}
+
+[data-theme="anime_premium"] #modal-romaji,
+[data-theme="anime_premium"] #modal-romaji {
+    color: var(--modal-romaji-color, #BB86FC);
+}
+
+[data-theme="anime_premium"] #modal-en,
+[data-theme="anime_premium"] #modal-en {
+    color: var(--modal-en-color, #8B949E);
+}
+
+[data-theme="anime_premium"] .modal-info hr,
+[data-theme="anime_premium"] .modal-info hr {
+    border-color: rgba(187, 134, 252, 0.2);
+}
+
+/* === MENU DROPDOWN === */
+[data-theme="anime_premium"] .menu-dropdown,
+[data-theme="starrail_premium"] .menu-dropdown,
+body.starrail-theme .menu-dropdown,
+body.anime-theme .menu-dropdown {
+    background: linear-gradient(135deg, rgba(13, 17, 23, 0.97) 0%, rgba(22, 27, 34, 0.97) 100%);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(187, 134, 252, 0.15);
+}
+
+[data-theme="anime_premium"] .menu-dropdown-btn,
+[data-theme="starrail_premium"] .menu-dropdown-btn,
+body.starrail-theme .menu-dropdown-btn,
+body.anime-theme .menu-dropdown-btn {
+    background: rgba(187, 134, 252, 0.05);
+    color: #e0e0e0;
+    border-left: 3px solid transparent;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+[data-theme="anime_premium"] .menu-dropdown-btn:hover,
+[data-theme="starrail_premium"] .menu-dropdown-btn:hover,
+body.anime-theme .menu-dropdown-btn,
+body.starrail-theme .menu-dropdown-btn:hover {
+    background: linear-gradient(90deg, rgba(187, 134, 252, 0.15) 0%, rgba(0, 242, 255, 0.1) 100%);
+    border-left-color: #BB86FC;
+    padding-left: 20px;
+    color: #00F2FF;
+    box-shadow: inset 0 0 20px rgba(187, 134, 252, 0.1);
+}
+
+/* Menu button character icons */
+[data-theme="anime_premium"] #home-menu-btn::before,
+[data-theme="anime_premium"] #home-menu-btn::before {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-image: url('assets/animestyle/mcicon1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 12px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 8px rgba(187, 134, 252, 0.4)) drop-shadow(0 0 4px rgba(0, 242, 255, 0.2));
+    transition: filter 0.3s ease;
+}
+
+[data-theme="anime_premium"] #style-menu-btn::before {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-image: url('assets/animestyle/swicon3.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 12px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 8px rgba(187, 134, 252, 0.4)) drop-shadow(0 0 4px rgba(0, 242, 255, 0.2));
+    transition: filter 0.3s ease;
+}
+
+[data-theme="anime_premium"] #about-menu-btn::before {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background-image: url('assets/animestyle/mcicon2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 12px;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 8px rgba(187, 134, 252, 0.4)) drop-shadow(0 0 4px rgba(0, 242, 255, 0.2));
+    transition: filter 0.3s ease;
+}
+
+[data-theme="anime_premium"] .menu-dropdown-btn:hover::before {
+    filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.6)) drop-shadow(0 0 6px rgba(187, 134, 252, 0.3));
+}
+
+/* === SEARCH BAR === */
+
+[data-theme="anime_premium"] #global-search,
+[data-theme="anime_premium"] #wordSearch {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.9) 0%, rgba(187, 134, 252, 0.05) 100%);
+    border: 2px solid rgba(187, 134, 252, 0.3);
+    color: #F0F6FC;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(187, 134, 252, 0.03);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+[data-theme="anime_premium"] #global-search:focus,
+[data-theme="anime_premium"] #wordSearch:focus {
+    border-color: #00F2FF;
+    box-shadow: 0 0 30px rgba(187, 134, 252, 0.3), 0 0 60px rgba(0, 242, 255, 0.15), inset 0 0 20px rgba(187, 134, 252, 0.08);
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(187, 134, 252, 0.08) 100%);
+}
+
+[data-theme="anime_premium"] #global-search::placeholder,
+[data-theme="anime_premium"] #wordSearch::placeholder {
+    color: #8B949E;
+    font-weight: 500;
+}
+
+/* === BUTTONS === */
+[data-theme="anime_premium"] .sound-trigger,
+[data-theme="starrail_premium"] .sound-trigger,
+body.anime-theme .sound-trigger,
+body.starrail-theme .sound-trigger,
+[data-theme="anime_premium"] .btn-primary,
+[data-theme="starrail_premium"] .btn-primary,
+body.starrail-theme .btn-primary,
+body.anime-theme .btn-primary {
+    background: linear-gradient(135deg, #BB86FC 0%, #00F2FF 100%);
+    box-shadow: 0 8px 24px rgba(187, 134, 252, 0.4);
+    color: #0D1117;
+    font-weight: 700;
+}
+
+[data-theme="anime_premium"] .sound-trigger:hover,
+[data-theme="starrail_premium"] .sound-trigger:hover,
+body.anime-theme .sound-trigger,
+body.starrail-theme .sound-trigger:hover,
+[data-theme="anime_premium"] .btn-primary:hover,
+[data-theme="starrail_premium"] .btn-primary:hover,
+body.anime-theme .btn-primary,
+body.starrail-theme .btn-primary:hover {
+    box-shadow: 0 12px 32px rgba(187, 134, 252, 0.5), 0 0 20px rgba(0, 242, 255, 0.3);
+}
+
+/* === VOCABULARY CARD TEXT === */
+[data-theme="anime_premium"] .card-text .jp {
+    color: #F0F6FC !important;
+}
+
+[data-theme="anime_premium"] .card-text .en {
+    color: #BB86FC !important;
+}
+
+[data-theme="anime_premium"] .card-text .romaji {
+    color: #00F2FF !important;
+}
+
+/* === BACK BUTTON === */
+[data-theme="anime_premium"] .back-btn-styled,
+[data-theme="starrail_premium"] .back-btn-styled,
+body.starrail-theme .back-btn-styled,
+body.anime-theme .back-btn-styled {
+    background: rgba(187, 134, 252, 0.1);
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    color: #BB86FC;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="anime_premium"] .back-btn-styled::before,
+[data-theme="starrail_premium"] .back-btn-styled::before,
+body.anime-theme .back-btn-styled,
+body.starrail-theme .back-btn-styled::before {
+    color: #00F2FF;
+}
+
+[data-theme="anime_premium"] .back-icon,
+[data-theme="starrail_premium"] .back-icon,
+body.starrail-theme .back-icon,
+body.anime-theme .back-icon {
+    font-size: 1.4rem;
+    filter: drop-shadow(0 0 4px rgba(187, 134, 252, 0.5));
+}
+
+/* === PREMIUM BADGE === */
+.premium-badge {
+    background: linear-gradient(135deg, #BB86FC, #00F2FF) !important;
+    color: #0D1117 !important;
+    font-weight: bold !important;
+    padding: 8px 16px !important;
+    border-radius: 24px !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 1.5px !important;
+    box-shadow: 0 4px 20px rgba(187, 134, 252, 0.3) !important;
+}
+
+/* === GLASS CARD EFFECT === */
+.quiz-card,
+.profile-container {
+    background: var(--bg-glass);
+    -webkit-backdrop-filter: blur(var(--blur-amount));
+    backdrop-filter: blur(var(--blur-amount));
+    border: 1px solid var(--border-glow);
+    border-radius: var(--border-radius);
+    box-shadow: var(--neon-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(187, 134, 252, 0.5);
+}
+
+/* === ANIMATIONS === */
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(187, 134, 252, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(187, 134, 252, 0.4);
+    }
+}
+
+@keyframes scanlines {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        border-color: rgba(187, 134, 252, 0.4);
+    }
+
+    50% {
+        border-color: rgba(0, 242, 255, 0.8);
+    }
+
+    100% {
+        border-color: rgba(187, 134, 252, 0.4);
+    }
+}
+
+.premium-border {
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* === Z-INDEX & POINTER FIXES === */
+[data-theme="anime_premium"] .hero::before,
+[data-theme="starrail_premium"] .hero::before,
+body.anime-theme .hero,
+body.starrail-theme .hero::before {
+    pointer-events: none !important;
+}
+
+.nav-right {
+    position: relative;
+}
+
+/* Section icon / mascot non-interactive */
+.section-anime-icon,
+#mascot-display {
+    pointer-events: none;
+}
+
+.section-anime-icon:hover {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* === PROFILE DISPLAY BOX (NEXT TO PROFILE BUTTON) === */
+#profile-display-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid var(--primary-red);
+    border-radius: 18px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: 14px;
+    left: 102px;
+    max-width: 300px;
+    min-width: 240px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+    backdrop-filter: blur(10px);
+}
+
+#profile-display-box .profile-img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 3px solid var(--primary-red);
+    object-fit: cover;
+    background: var(--bg-light);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.15);
+}
+
+#profile-display-box .profile-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+#profile-display-box .username {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+#profile-display-box .subtitle {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Theme-specific profile display box styles */
+[data-theme="ocean"] #profile-display-box {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: #0077be;
+    box-shadow: 0 14px 36px rgba(0, 119, 190, 0.25);
+}
+
+[data-theme="ocean"] #profile-display-box .profile-img {
+    border-color: #0077be;
+    box-shadow: 0 5px 16px rgba(0, 119, 190, 0.18);
+}
+
+[data-theme="ocean"] #profile-display-box .username {
+    color: #0077be;
+}
+
+[data-theme="sunset"] #profile-display-box {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: #ff6b35;
+    box-shadow: 0 14px 36px rgba(255, 107, 53, 0.25);
+}
+
+[data-theme="sunset"] #profile-display-box .profile-img {
+    border-color: #ff6b35;
+    box-shadow: 0 5px 16px rgba(255, 107, 53, 0.18);
+}
+
+[data-theme="sunset"] #profile-display-box .username {
+    color: #ff6b35;
+}
+
+[data-theme="forest"] #profile-display-box {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: #2d5016;
+    box-shadow: 0 14px 36px rgba(45, 80, 22, 0.25);
+}
+
+[data-theme="forest"] #profile-display-box .profile-img {
+    border-color: #2d5016;
+    box-shadow: 0 5px 16px rgba(45, 80, 22, 0.18);
+}
+
+[data-theme="forest"] #profile-display-box .username {
+    color: #2d5016;
+}
+
+[data-theme="purple"] #profile-display-box {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: #6b46c1;
+    box-shadow: 0 14px 36px rgba(107, 70, 193, 0.25);
+}
+
+[data-theme="purple"] #profile-display-box .profile-img {
+    border-color: #6b46c1;
+    box-shadow: 0 5px 16px rgba(107, 70, 193, 0.18);
+}
+
+[data-theme="purple"] #profile-display-box .username {
+    color: #6b46c1;
+}
+
+[data-theme="anime_premium"] #profile-display-box {
+    background: rgba(13, 17, 23, 0.95);
+    border-color: #BB86FC;
+    box-shadow: 0 0 30px rgba(187, 134, 252, 0.5);
+    color: #F0F6FC;
+}
+
+[data-theme="anime_premium"] #profile-display-box .profile-img {
+    border-color: #00F2FF;
+    box-shadow: 0 0 14px rgba(0, 242, 255, 0.45);
+}
+
+[data-theme="anime_premium"] #profile-display-box .username {
+    color: #00F2FF;
+}
+
+[data-theme="anime_premium"] #profile-display-box .subtitle {
+    color: #8B949E;
+}
+
+/* === STYLE SELECTOR MODAL === */
+.style-selector-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.style-selector-modal.show {
+    display: flex;
+}
+
+.style-selector-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.style-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.style-selector-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    color: var(--text-dark);
+}
+
+.style-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    padding: 24px;
+}
+
+.style-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-card);
+}
+
+.style-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.style-card.active {
+    border-color: var(--accent-primary);
+    background: rgba(230, 57, 70, 0.05);
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.15);
+}
+
+.style-preview {
+    width: 100%;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.preview-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.style-info h3 {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.style-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.premium-badge {
+    align-self: flex-start;
+    background: linear-gradient(135deg, #BB86FC, #00F2FF);
+    color: #0D1117;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+/* === ABOUT MODAL === */
+.about-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100000;
+    background: rgba(11, 18, 32, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+.about-modal-card {
+    width: min(560px, 100%);
+    background: var(--bg-card, #ffffff);
+    color: var(--text-main, #1a1a2e);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    animation: about-modal-pop 0.22s ease-out;
+}
+
+.about-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.about-modal-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.about-modal-close {
+    border: none;
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--text-muted, #636e72);
+    background: rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.about-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.about-modal-body {
+    padding: 20px;
+    display: grid;
+    gap: 12px;
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.about-modal-body p {
+    margin: 0;
+}
+
+.about-modal-muted {
+    color: var(--text-muted, #636e72);
+}
+
+@keyframes about-modal-pop {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+[data-theme="anime_premium"] .about-modal-card,
+[data-theme="starrail_premium"] .about-modal-card,
+body.starrail-theme .about-modal-card,
+body.anime-theme .about-modal-card {
+    background: rgba(13, 17, 23, 0.9);
+    border-color: rgba(187, 134, 252, 0.35);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] .about-modal-header,
+[data-theme="starrail_premium"] .about-modal-header,
+body.starrail-theme .about-modal-header,
+body.anime-theme .about-modal-header {
+    border-bottom-color: rgba(187, 134, 252, 0.25);
+}
+
+[data-theme="anime_premium"] .about-modal-title,
+[data-theme="starrail_premium"] .about-modal-title,
+body.starrail-theme .about-modal-title,
+body.anime-theme .about-modal-title {
+    color: #F0F6FC;
+}
+
+[data-theme="anime_premium"] .about-modal-body,
+[data-theme="starrail_premium"] .about-modal-body,
+body.starrail-theme .about-modal-body,
+body.anime-theme .about-modal-body {
+    color: #E1E1E1;
+}
+
+[data-theme="anime_premium"] .about-modal-muted,
+[data-theme="starrail_premium"] .about-modal-muted,
+body.starrail-theme .about-modal-muted,
+body.anime-theme .about-modal-muted {
+    color: #8B949E;
+}
+
+[data-theme="anime_premium"] .about-modal-close,
+[data-theme="starrail_premium"] .about-modal-close,
+body.starrail-theme .about-modal-close,
+body.anime-theme .about-modal-close {
+    color: #8B949E;
+    background: rgba(187, 134, 252, 0.15);
+}
+
+[data-theme="anime_premium"] .about-modal-close:hover,
+[data-theme="starrail_premium"] .about-modal-close:hover,
+body.starrail-theme .about-modal-close:hover,
+body.anime-theme .about-modal-close:hover {
+    color: #F0F6FC;
+    background: rgba(187, 134, 252, 0.32);
+}
+
+/* Theme-specific modal styles */
+[data-theme="anime_premium"] .style-selector-content,
+[data-theme="starrail_premium"] .style-selector-content,
+body.starrail-theme .style-selector-content,
+body.anime-theme .style-selector-content {
+    background: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+    color: #F0F6FC;
+    border: 1px solid rgba(187, 134, 252, 0.3);
+    box-shadow: 0 0 40px rgba(187, 134, 252, 0.2), 0 0 80px rgba(0, 242, 255, 0.1);
+}
+
+[data-theme="anime_premium"] .style-selector-header,
+[data-theme="starrail_premium"] .style-selector-header,
+body.starrail-theme .style-selector-header,
+body.anime-theme .style-selector-header {
+    border-bottom-color: rgba(187, 134, 252, 0.2);
+    background: linear-gradient(90deg, rgba(187, 134, 252, 0.05) 0%, rgba(0, 242, 255, 0.05) 100%);
+}
+
+[data-theme="anime_premium"] .style-selector-header h2 {
+    color: #F0F6FC;
+    background: linear-gradient(135deg, #BB86FC 0%, #00F2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+[data-theme="anime_premium"] .close-modal-btn,
+[data-theme="starrail_premium"] .close-modal-btn,
+body.starrail-theme .close-modal-btn,
+body.anime-theme .close-modal-btn {
+    color: #8B949E;
+    transition: all 0.3s ease;
+}
+
+[data-theme="anime_premium"] .close-modal-btn:hover,
+[data-theme="starrail_premium"] .close-modal-btn:hover,
+body.starrail-theme .close-modal-btn:hover,
+body.anime-theme .close-modal-btn:hover {
+    color: #00F2FF;
+    transform: rotate(90deg);
+}
+
+[data-theme="anime_premium"] .style-card,
+[data-theme="starrail_premium"] .style-card,
+body.starrail-theme .style-card,
+body.anime-theme .style-card {
+    background: rgba(22, 27, 34, 0.6);
+    border: 2px solid rgba(187, 134, 252, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="anime_premium"] .style-card:hover,
+[data-theme="starrail_premium"] .style-card:hover,
+body.starrail-theme .style-card:hover,
+body.anime-theme .style-card:hover {
+    border-color: #00F2FF;
+    background: rgba(22, 27, 34, 0.9);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.3), inset 0 0 20px rgba(187, 134, 252, 0.1);
+    transform: translateY(-6px);
+}
+
+[data-theme="anime_premium"] .style-card.active {
+    background: linear-gradient(135deg, rgba(187, 134, 252, 0.15) 0%, rgba(0, 242, 255, 0.1) 100%);
+    border-color: #BB86FC;
+    box-shadow: 0 0 40px rgba(187, 134, 252, 0.4), inset 0 0 20px rgba(187, 134, 252, 0.2);
+}
+
+[data-theme="anime_premium"] .style-info h3 {
+    color: #F0F6FC;
+}
+
+[data-theme="anime_premium"] .style-info p {
+    color: #8B949E;
+}
+
+/* --- PREMIUM THEME MODULAR STYLES --- */
+body.premium-theme {
+    background-color: transparent !important;
+}
+
+.premium-bg-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+}
+
+body.premium-theme .premium-bg-container {
+    display: block;
+}
+
+body.premium-theme .menu-section-block {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-glass, rgba(255, 255, 255, 0.85));
+}
+
+/* --- PREMIUM GLASSMORPHISM HERO --- */
+
+
+
+
+/* OVERRIDES FOR STARRAIL THEME TO USE ANIME COLORS */
+[data-theme="starrail_premium"] .section-title,
+[data-theme="starrail_premium"] .item-title,
+[data-theme="starrail_premium"] .category-title,
+[data-theme="starrail_premium"] .menu-title,
+body[data-theme="starrail_premium"] .hero h1,
+body[data-theme="starrail_premium"] .hero h2 {
+    color: var(--primary-accent) !important;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5) !important;
+}
+
+[data-theme="starrail_premium"] .flag-btn {
+    border: 2px solid var(--primary-accent) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.4) !important;
+}
+
+[data-theme="starrail_premium"] .search-icon,
+[data-theme="starrail_premium"] .search-box svg,
+[data-theme="starrail_premium"] i.fa-search,
+[data-theme="starrail_premium"] .fas.fa-search {
+    fill: var(--secondary-accent) !important;
+    color: var(--secondary-accent) !important;
+}
+
+[data-theme="starrail_premium"] .back-btn,
+[data-theme="starrail_premium"] .menu-trigger {
+    border: 2px solid var(--primary-accent) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: var(--primary-accent) !important;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.3) !important;
+    text-shadow: none !important;
+}
+
+[data-theme="starrail_premium"] .back-btn:hover,
+[data-theme="starrail_premium"] .menu-trigger:hover {
+    background: var(--primary-accent) !important;
+    color: #fff !important;
+    box-shadow: 0 0 20px rgba(187, 134, 252, 0.6) !important;
+}
+
+/* OVERRIDES FOR STARRAIL HERO GLASSMORPHISM */
+
+
+
+
+
+/* --- GLOBAL FOOTER --- */
+.app-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-glow);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+body.premium-theme .app-footer {
+    background: rgba(13, 17, 23, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
 }

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Quiz | Nihongo Master</title>
+    <!-- INSTANT THEME LOADER - Prevents flash of wrong theme -->
+    <script>
+        (function() {
+            try {
+                const savedStyle = localStorage.getItem('selectedStyle') || 'default';
+                if (savedStyle !== 'default') {
+                    document.documentElement.setAttribute('data-theme-pending', savedStyle);
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="../style.css">
+    <script>
+        // Apply theme as soon as CSS is ready
+        document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme-pending') || 'default');
+        document.documentElement.removeAttribute('data-theme-pending');
+    </script>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <div id="premium-bg" class="premium-bg-container"></div>
+
+<header class="hero">
+    <div class="hero-nav-row">
+        <button onclick="goHome()" class="back-btn-styled">Back</button>
+       
+        <div class="nav-right">
+            <button id="lang-toggle" class="flag-btn" onclick="toggleLanguage()">
+                <img id="flag-img" src="../assets/flags/tm.png" alt="Switch Language">
+            </button>
+            <button id="menu-toggle" class="menu-trigger" onclick="toggleMenu(event)">MENU ☰</button>
+            <div id="menu-dropdown" class="menu-dropdown">
+                <button id="home-menu-btn" class="menu-dropdown-btn" onclick="goHome()">Home</button>
+                <button id="style-menu-btn" class="menu-dropdown-btn" onclick="changeStyle()">Change Style</button>
+                <button id="about-menu-btn" class="menu-dropdown-btn" onclick="showAbout()">About</button>
+            </div>
+        </div>
+    </div>
+    <div class="hero-main">
+        <h1 id="quiz-title">Flash Quiz</h1>
+        <p id="quiz-subtitle">Test your knowledge and track your progress.</p>
+    </div>
+</header>
+
+<main class="main-container">
+
+    <!-- Quiz Type Selection Screen -->
+    <div id="quiz-menu" class="quiz-screen active">
+        <h2 id="select-category">Select a Category</h2>
+        <div class="menu-grid">
+            <button class="menu-item quiz-category-btn" onclick="startQuiz('vocabulary')">
+                <div class="item-icon-circle red-bg">📖</div>
+                <div class="item-text"><span class="en">Vocabulary</span></div>
+            </button>
+            <button class="menu-item quiz-category-btn" onclick="startQuiz('kanji')">
+                <div class="item-icon-circle red-bg">⛩️</div>
+                <div class="item-text"><span class="en">Kanji</span></div>
+            </button>
+            <button class="menu-item quiz-category-btn" onclick="startQuiz('kana')">
+                <div class="item-icon-circle blue-bg">あ</div>
+                <div class="item-text"><span class="en">Kana</span></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-content" class="quiz-screen">
+        <div class="quiz-header">
+            <div class="quiz-progress">
+                <span id="question-counter">1/10</span>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+            <button class="quiz-exit-btn" onclick="exitQuiz()">✕</button>
+        </div>
+
+        <div class="quiz-question-box">
+            <div class="quiz-question" id="quiz-question">
+                Which is correct?
+            </div>
+            <div class="quiz-subtext" id="quiz-subtext"></div>
+        </div>
+
+        <div class="quiz-answers" id="quiz-answers">
+            <!-- Answers will be populated dynamically -->
+        </div>
+
+        <div class="quiz-footer">
+            <button class="quiz-btn-secondary" id="skip-btn" onclick="skipQuestion()">Skip</button>
+            <button class="quiz-btn-primary is-hidden" id="submit-btn" onclick="submitAnswer()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="quiz-results" class="quiz-screen">
+        <div class="results-container">
+            <h2 id="results-title">Quiz Complete!</h2>
+            <div class="result-profile" id="result-profile">
+                <div class="result-profile-avatar-wrap">
+                    <img id="result-profile-avatar" alt="Profile avatar">
+                    <span id="result-profile-fallback" aria-hidden="true">U</span>
+                </div>
+                <p id="result-profile-name">Learner</p>
+                <p class="result-score-line"><span id="score-label">Score:</span> <span id="score-summary">0/0</span></p>
+            </div>
+            <div class="results-score">
+                <div class="score-circle">
+                    <span id="final-score">0%</span>
+                </div>
+            </div>
+            <div class="results-stats">
+                <div class="stat-item">
+                    <span class="stat-label" id="correct-label">Correct:</span>
+                    <span class="stat-value" id="correct-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" id="incorrect-label">Incorrect:</span>
+                    <span class="stat-value" id="incorrect-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label" id="skipped-label">Skipped:</span>
+                    <span class="stat-value" id="skipped-count">0</span>
+                </div>
+            </div>
+            <div class="results-buttons">
+                <button class="quiz-btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                <button class="quiz-btn-secondary" onclick="selectCategory()">New Category</button>
+                <a href="../index.html" class="quiz-btn-secondary inline-link-button">Return Home</a>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="../app.js"></script>
+<script src="quiz.js"></script>
+
+
+<footer class="app-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Nihongo Master. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
