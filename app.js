@@ -155,7 +155,25 @@ function resolveSearchIcon(style) {
 
 function isImageAssetPath(value) {
     if (typeof value !== 'string') return false;
-    return /\.(png|jpe?g|webp|gif|avif|svg)(\?.*)?$/i.test(value.trim());
+    const trimmed = value.trim();
+    if (!trimmed) return false;
+
+    // Allow DB-coded image data and direct URLs, not only local file paths.
+    if (/^data:image\//i.test(trimmed)) return true;
+    if (/^(https?:|blob:|\/)/i.test(trimmed)) return true;
+
+    return /\.(png|jpe?g|webp|gif|avif|svg)(\?.*)?$/i.test(trimmed);
+}
+
+function resolveImageReference(imageValue) {
+    if (typeof imageValue !== 'string') return null;
+    const trimmed = imageValue.trim();
+    if (!trimmed) return null;
+
+    // Keep direct references untouched (http(s), data URLs, blob URLs, root-relative paths).
+    if (/^(https?:|data:|blob:|\/)/i.test(trimmed)) return trimmed;
+
+    return `${assetPathPrefix}${trimmed}`;
 }
 
 function resolveThemeHeaderImage(style) {
@@ -249,8 +267,9 @@ function applyStyle(styleId = currentStyle) {
     // 3.1 Optional theme hero image override (from DB assets.hero_header)
     const themeHeaderImage = resolveThemeHeaderImage(style);
     if (themeHeaderImage) {
+        const resolvedHeaderImage = resolveImageReference(themeHeaderImage);
         document.body.classList.add('theme-header-image');
-        root.style.setProperty('--theme-hero-image', `url('${assetPathPrefix}${themeHeaderImage}')`);
+        root.style.setProperty('--theme-hero-image', `url('${resolvedHeaderImage}')`);
     } else {
         document.body.classList.remove('theme-header-image');
         root.style.removeProperty('--theme-hero-image');
@@ -271,7 +290,8 @@ function applyStyle(styleId = currentStyle) {
             // Always paint a color layer; if an image exists it renders above this fallback color.
             premiumBg.style.backgroundColor = fallbackBgColor;
             if (bgImage) {
-                premiumBg.style.backgroundImage = `url('${assetPathPrefix}${bgImage}')`;
+                const resolvedBackgroundImage = resolveImageReference(bgImage);
+                premiumBg.style.backgroundImage = `url('${resolvedBackgroundImage}')`;
             } else {
                 premiumBg.style.backgroundImage = 'none';
             }
