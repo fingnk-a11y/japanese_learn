@@ -1,0 +1,67 @@
+{
+  "id": "informatics_premium",
+  "name": "Informatics (Premium)",
+  "name_tm": "Informatika (Premium)",
+  "description": "Premium blue theme perfect for tech learning with professional card-based layout",
+  "search_icon": "💻",
+  "premium": true,
+  "is_premium": true,
+  "preview": {
+    "primary": "#0066cc",
+    "secondary": "#00a8ff",
+    "background": "#f0f5fa",
+    "text": "#1a1a2e"
+  },
+  "colors": {
+    "bg_main": "#f0f5fa",
+    "bg_card": "rgba(255, 255, 255, 0.9)",
+    "accent_primary": "#0066cc",
+    "accent_secondary": "#00a8ff",
+    "text_main": "#1a1a2e",
+    "text_muted": "#666999",
+    "border_glow": "rgba(0, 102, 204, 0.12)"
+  },
+  "css": {
+    "--primary-red": "#0066cc",
+    "--accent-primary": "#0066cc",
+    "--accent-secondary": "#00a8ff",
+    "--dark-navy": "#1a1a2e",
+    "--foundation-blue": "#00a8ff",
+    "--bg-light": "#f0f5fa",
+    "--bg-main": "#f0f5fa",
+    "--bg-card": "rgba(255, 255, 255, 0.9)",
+    "--text-dark": "#1a1a2e",
+    "--text-main": "#1a1a2e",
+    "--text-muted": "#666999",
+    "--text-light": "#ffffff",
+    "--hero-gradient": "linear-gradient(135deg, rgba(0, 61, 122, 0.85) 0%, rgba(0, 102, 204, 0.7) 40%, rgba(0, 168, 255, 0.6) 100%)",
+    "--hero-shadow": "0 10px 40px rgba(0, 102, 204, 0.35), 0 0 80px rgba(0, 168, 255, 0.1)",
+    "--shadow-premium": "0 10px 40px rgba(0, 102, 204, 0.15)",
+    "--border-glow": "rgba(0, 102, 204, 0.12)",
+    "--header-bg": "rgba(26, 58, 82, 0.85)",
+    "--header-text": "#ffffff",
+    "--section-header-bg": "rgba(26, 58, 82, 0.85)",
+    "--section-header-text": "#ffffff",
+    "--hero-blur": "20px",
+    "--hero-border-bottom": "1px solid rgba(0, 168, 255, 0.25)"
+  },
+  "profileBox": {
+    "bg": "#ffffff",
+    "border": "3px solid #0066cc",
+    "shadow": "0 8px 24px rgba(0, 102, 204, 0.2)",
+    "textColor": "#1a1a2e",
+    "usernameColor": "#0066cc"
+  },
+  "assets": {
+    "hero_header": "assets/infotheme/info-theme-header-circuit.jpg",
+    "hira_icon": "assets/infotheme/hiraganaicon.jpg",
+    "kata_icon": "assets/infotheme/katakanaicon.jpg",
+    "vocab_icon": "assets/infotheme/vocabulary.png",
+    "grammar_icon": "assets/infotheme/grammar.png",
+    "kanji_icon": "assets/infotheme/kanji.png",
+    "quiz_icon": "assets/infotheme/quiz.png",
+    "game_icon": "assets/infotheme/game.png",
+    "profile_icon": "",
+    "background": "assets/infotheme/background.jpg"
+  }
+}
