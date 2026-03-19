@@ -29,6 +29,17 @@
     --section-glass-blur: 12px;
     --section-title-color: var(--text-dark);
     --section-title-glow: none;
+    --nav-btn-bg: rgba(26, 26, 46, 0.82);
+    --nav-btn-border: rgba(255, 255, 255, 0.3);
+    --nav-btn-text: #ffffff;
+    --nav-btn-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+    --nav-btn-bg-hover: rgba(36, 36, 56, 0.92);
+    --nav-btn-border-hover: rgba(255, 255, 255, 0.55);
+    --nav-btn-text-hover: #ffffff;
+    --menu-dropdown-bg: rgba(14, 14, 20, 0.96);
+    --menu-dropdown-text: #ffffff;
+    --menu-dropdown-hover-bg: rgba(255, 255, 255, 0.12);
+    --menu-dropdown-hover-text: #ffffff;
     --transition: all 0.3s ease;
 }
 
@@ -3215,6 +3226,40 @@ body.premium-theme .menu-section-block {
 [data-theme="informatics_premium"] .vocab-card:hover {
     border-color: var(--accent-primary) !important;
     box-shadow: var(--card-shadow-hover, var(--shadow-premium)) !important;
+}
+
+[data-theme="informatics_premium"] .back-btn-styled,
+[data-theme="informatics_premium"] .menu-trigger,
+[data-theme="informatics_premium"] .flag-btn {
+    background: var(--nav-btn-bg) !important;
+    border: 1px solid var(--nav-btn-border) !important;
+    color: var(--nav-btn-text) !important;
+    box-shadow: var(--nav-btn-shadow) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+[data-theme="informatics_premium"] .back-btn-styled:hover,
+[data-theme="informatics_premium"] .menu-trigger:hover,
+[data-theme="informatics_premium"] .flag-btn:hover {
+    background: var(--nav-btn-bg-hover) !important;
+    border-color: var(--nav-btn-border-hover) !important;
+    color: var(--nav-btn-text-hover) !important;
+}
+
+[data-theme="informatics_premium"] .menu-dropdown {
+    background: var(--menu-dropdown-bg) !important;
+    border: 1px solid var(--nav-btn-border) !important;
+    box-shadow: var(--nav-btn-shadow) !important;
+}
+
+[data-theme="informatics_premium"] .menu-dropdown-btn {
+    color: var(--menu-dropdown-text) !important;
+}
+
+[data-theme="informatics_premium"] .menu-dropdown-btn:hover {
+    background: var(--menu-dropdown-hover-bg) !important;
+    color: var(--menu-dropdown-hover-text) !important;
 }
 
 /* --- PREMIUM GLASSMORPHISM HERO --- */
