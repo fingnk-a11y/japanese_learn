@@ -264,6 +264,12 @@ function applyStyle(styleId = currentStyle) {
         const premiumBg = document.getElementById('premium-bg');
         if (premiumBg && style.assets) {
             const bgImage = style.assets.background || style.assets.bg_overlay;
+            const fallbackBgColor = (style.colors && (style.colors.bg_main || style.colors.bg_card))
+                ? (style.colors.bg_main || style.colors.bg_card)
+                : 'transparent';
+
+            // Always paint a color layer; if an image exists it renders above this fallback color.
+            premiumBg.style.backgroundColor = fallbackBgColor;
             if (bgImage) {
                 premiumBg.style.backgroundImage = `url('${assetPathPrefix}${bgImage}')`;
             } else {
@@ -340,6 +346,7 @@ function applyStyle(styleId = currentStyle) {
         const premiumBg = document.getElementById('premium-bg');
         if (premiumBg) {
             premiumBg.style.backgroundImage = 'none';
+            premiumBg.style.backgroundColor = 'transparent';
         }
         // Reset card icons
         document.querySelectorAll('.item-icon-circle').forEach(iconContainer => {
