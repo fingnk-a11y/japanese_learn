@@ -63,7 +63,7 @@
     "usernameColor": "#ffd60a"
   },
   "assets": {
-    "hero_header": "assets/infotheme/informaticsbackground.jpg",
+    "hero_header": "assets/infotheme/background.jpg",
     "hira_icon": "assets/infotheme/hiraganaicon.jpg",
     "kata_icon": "assets/infotheme/katakanaicon.jpg",
     "vocab_icon": "assets/infotheme/vocabulary.png",
