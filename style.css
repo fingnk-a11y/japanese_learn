@@ -23,6 +23,12 @@
     --hero-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
     --shadow-premium: 0 4px 20px rgba(0, 0, 0, 0.05);
     --border-glow: rgba(0, 0, 0, 0.08);
+    --section-glass-bg: rgba(255, 255, 255, 0.85);
+    --section-glass-border: rgba(0, 0, 0, 0.08);
+    --section-glass-shadow: 0 12px 34px rgba(0, 0, 0, 0.08);
+    --section-glass-blur: 12px;
+    --section-title-color: var(--text-dark);
+    --section-title-glow: none;
     --transition: all 0.3s ease;
 }
 
@@ -3176,38 +3182,39 @@ body.premium-theme .premium-bg-container {
     display: block;
 }
 
-/* Informatics premium: keep background image visible behind dark UI */
-[data-theme="informatics_premium"] .premium-bg-container,
-body[data-theme="informatics_premium"].premium-theme .premium-bg-container {
-    opacity: 0.92;
-    filter: saturate(0.9) contrast(1.08) brightness(0.58);
-}
-
 body.premium-theme .menu-section-block {
-    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     background: var(--bg-glass, rgba(255, 255, 255, 0.85));
 }
 
-/* Informatics premium: black cards + stronger yellow glow */
+/* Informatics premium: variable-driven glass sections + glowing gold titles */
+[data-theme="informatics_premium"] .menu-section-block {
+    background: var(--section-glass-bg) !important;
+    border: 1px solid var(--section-glass-border) !important;
+    box-shadow: var(--section-glass-shadow) !important;
+    -webkit-backdrop-filter: blur(var(--section-glass-blur)) !important;
+    backdrop-filter: blur(var(--section-glass-blur)) !important;
+}
+
+[data-theme="informatics_premium"] .section-title {
+    color: var(--section-title-color) !important;
+    text-shadow: var(--section-title-glow) !important;
+}
+
+/* Informatics premium: cards consume theme tokens (no hardcoded colors) */
 [data-theme="informatics_premium"] .menu-item,
 [data-theme="informatics_premium"] .vocab-card,
 [data-theme="informatics_premium"] .modal-content {
-    background: linear-gradient(145deg, rgba(9, 9, 9, 0.96) 0%, rgba(14, 14, 14, 0.96) 100%) !important;
-    border: 2px solid rgba(255, 214, 10, 0.62) !important;
-    box-shadow:
-        0 12px 38px rgba(0, 0, 0, 0.72),
-        0 0 28px rgba(255, 214, 10, 0.34),
-        inset 0 0 16px rgba(255, 214, 10, 0.1) !important;
+    background: var(--bg-card) !important;
+    border: 2px solid var(--card-border, var(--border-glow)) !important;
+    box-shadow: var(--card-shadow, var(--shadow-premium)) !important;
 }
 
 [data-theme="informatics_premium"] .menu-item:hover,
 [data-theme="informatics_premium"] .vocab-card:hover {
-    border-color: rgba(255, 214, 10, 0.95) !important;
-    box-shadow:
-        0 20px 64px rgba(0, 0, 0, 0.78),
-        0 0 44px rgba(255, 214, 10, 0.62),
-        inset 0 0 22px rgba(255, 214, 10, 0.18) !important;
+    border-color: var(--accent-primary) !important;
+    box-shadow: var(--card-shadow-hover, var(--shadow-premium)) !important;
 }
 
 /* --- PREMIUM GLASSMORPHISM HERO --- */
