@@ -32,7 +32,8 @@
 .kana-char {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2d3436;
+    color: var(--section-title-color, var(--text-main));
+    text-shadow: var(--section-title-glow, none);
 }
 
 .kana-romaji {
@@ -62,7 +63,8 @@
 .large-kana {
     font-size: 5rem;
     line-height: 1;
-    color: #2d3436;
+    color: var(--section-title-color, var(--text-main));
+    text-shadow: var(--section-title-glow, none);
 }
 
 /* Readings Box */

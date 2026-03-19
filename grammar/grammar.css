@@ -1,34 +1,9 @@
 /* --- 1. CORE RESET & GRAMMAR-SPECIFIC VARIABLES --- */
 /* Grammar page specific variables - independent from global */
 :root {
-    --grammar-blue: #00a8ff;
-    --grammar-card-bg: #ffffff;
-    --grammar-shadow: 0 25px 50px rgba(0, 168, 255, 0.15);
-}
-
-[data-theme="ocean"] {
-    --grammar-blue: #0077be;
-    --grammar-card-bg: #d9e8f5;
-}
-
-[data-theme="sunset"] {
-    --grammar-blue: #ff6b6b;
-    --grammar-card-bg: #ffe8cc;
-}
-
-[data-theme="forest"] {
-    --grammar-blue: #2d6a4f;
-    --grammar-card-bg: #d8f3dc;
-}
-
-[data-theme="purple"] {
-    --grammar-blue: #7209b7;
-    --grammar-card-bg: #f0e6ff;
-}
-
-[data-theme="anime_premium"], [data-theme="starrail_premium"] {
-    --grammar-blue: #bb86fc;
-    --grammar-card-bg: #0d1117;
+    --grammar-blue: var(--accent-primary);
+    --grammar-card-bg: var(--bg-card);
+    --grammar-shadow: var(--card-shadow-hover, var(--shadow-premium));
 }
 
 /* Variables are now set dynamically via JavaScript from styles.json */
@@ -113,7 +88,7 @@ html, body {
 .grammar-card {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    background: var(--bg-card);
+    background: var(--grammar-card-bg);
     border-radius: 28px;
     overflow: hidden; /* This forces the blue header to clip to the card's rounded corners */
     display: flex;
@@ -121,6 +96,8 @@ html, body {
     padding: 0; /* Removes the inner 'cushion' so blue hits the edge */
     width: 100%;
     box-sizing: border-box;
+    border: 1px solid var(--card-border, var(--border-glow));
+    box-shadow: var(--card-shadow, var(--shadow-premium));
 }
 
 .card-blue-header {
@@ -198,7 +175,8 @@ html, body {
 
 .grammar-card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 25px 50px rgba(0, 168, 255, 0.15);
+    box-shadow: var(--grammar-shadow);
+    border-color: var(--accent-primary);
 }
 
 .grammar-card:hover .card-footer-accent { width: 60px; opacity: 1; }
