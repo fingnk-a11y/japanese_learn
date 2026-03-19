@@ -19,7 +19,7 @@
     "accent_secondary": "#ffea70",
     "text_main": "#f5f5f5",
     "text_muted": "#c7c7c7",
-    "border_glow": "rgba(255, 214, 10, 0.52)"
+    "border_glow": "rgba(255, 214, 10, 0.72)"
   },
   "css": {
     "--primary-red": "#ffd60a",
@@ -35,9 +35,13 @@
     "--text-muted": "#c7c7c7",
     "--text-light": "#ffffff",
     "--hero-gradient": "linear-gradient(135deg, rgba(14, 14, 14, 0.96) 0%, rgba(8, 8, 8, 0.97) 60%, rgba(0, 0, 0, 1) 100%)",
-    "--hero-shadow": "0 10px 40px rgba(255, 214, 10, 0.28), 0 0 88px rgba(255, 214, 10, 0.22)",
-    "--shadow-premium": "0 12px 44px rgba(255, 214, 10, 0.24)",
-    "--border-glow": "rgba(255, 214, 10, 0.52)",
+    "--hero-shadow": "0 14px 54px rgba(255, 214, 10, 0.42), 0 0 118px rgba(255, 214, 10, 0.3)",
+    "--shadow-premium": "0 16px 52px rgba(255, 214, 10, 0.42)",
+    "--border-glow": "rgba(255, 214, 10, 0.72)",
+    "--card-border": "rgba(255, 214, 10, 0.68)",
+    "--card-shadow": "0 12px 38px rgba(0, 0, 0, 0.72), 0 0 22px rgba(255, 214, 10, 0.34)",
+    "--card-shadow-hover": "0 20px 64px rgba(0, 0, 0, 0.78), 0 0 36px rgba(255, 214, 10, 0.58)",
+    "--card-hover-bg": "#111111",
     "--header-bg": "rgba(10, 10, 10, 0.9)",
     "--header-text": "#ffd60a",
     "--section-header-bg": "rgba(10, 10, 10, 0.9)",
@@ -53,7 +57,7 @@
     "usernameColor": "#ffd60a"
   },
   "assets": {
-    "hero_header": "assets/infotheme/info-theme-header-circuit.jpg",
+    "hero_header": "assets/infotheme/informaticsbackground.jpg",
     "hira_icon": "assets/infotheme/hiraganaicon.jpg",
     "kata_icon": "assets/infotheme/katakanaicon.jpg",
     "vocab_icon": "assets/infotheme/vocabulary.png",
@@ -62,6 +66,6 @@
     "quiz_icon": "assets/infotheme/quiz.png",
     "game_icon": "assets/infotheme/game.png",
     "profile_icon": "",
-    "background": "assets/infotheme/background.jpg"
+    "background": "assets/infotheme/informaticsbackground.jpg"
   }
 }
